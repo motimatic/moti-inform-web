@@ -87,7 +87,7 @@ export class CommandNavigate {
                                 }
                             ],
                             "summary": {
-                                "type": "metric",
+                                "type": "text",
                                 "pre": "We have over",
                                 "value": "150",
                                 "post": "resource links available",
