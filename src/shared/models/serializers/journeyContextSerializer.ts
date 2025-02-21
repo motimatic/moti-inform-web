@@ -1,13 +1,13 @@
 import { BaseSerializer } from "./baseSerializer";
-import {ResourceFinderContext} from "../resourceFinderContext.model.ts";
+import {JourneyContext} from "../journeyContext.model.ts";
 import {PageSerializer} from "./pageSerializer.ts";
 
 
-export class ResourceFinderContextSerializer extends BaseSerializer {
+export class JourneyContextSerializer extends BaseSerializer {
 
     public deserialize( data ): object {
 
-        const context = new ResourceFinderContext();
+        const context = new JourneyContext();
 
         this._copyAttributes(context, data);
 

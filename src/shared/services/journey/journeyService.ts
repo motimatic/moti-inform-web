@@ -1,7 +1,7 @@
 import {CommandNavigate} from "./commands/cmdNavigate.ts";
 
 
-export class ResourceFinderService {
+export class JourneyService {
 
     navigate(fromPage=null, action=null, offset=0, limit=20) {
 

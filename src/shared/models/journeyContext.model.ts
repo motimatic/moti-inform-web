@@ -1,7 +1,7 @@
 import {Page} from "./page.model.ts";
 
 
-export class ResourceFinderContext {
+export class JourneyContext {
 
     current_page: number;
     pages: Page[] = [];

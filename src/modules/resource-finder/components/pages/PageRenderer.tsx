@@ -3,7 +3,8 @@ import {resourceFinderStore} from "../../state/resourceFinderStore.ts";
 import {useSnapshot} from "valtio/react";
 import {PageFactory} from "./pageFactory.ts";
 import {Page} from "../../../../shared/models/page.model.ts";
-import {ResourceFinderService} from "../../../../shared/services/resource-finder/resourceFinderService.ts";
+import {JourneyService} from "../../../../shared/services/journey/journeyService.ts";
+import {JourneyContext} from "../../../../shared/models/journeyContext.model.ts";
 
 
 const PageRenderer = () => {
@@ -13,7 +14,7 @@ const PageRenderer = () => {
     const [currentPage, setCurrentPage] = useState(new Page());
     const [CurrentPageComponent, setCurrentPageComponent] = useState<React.FC | null>(null);
 
-    const service = new ResourceFinderService();
+    const service = new JourneyService();
 
     useEffect(() => {
 
@@ -22,6 +23,7 @@ const PageRenderer = () => {
             try {
                 const finderContext =  await service.navigate(currentPage.name);
                 if (finderContext) {
+                    resourceFinderStore.setContext(finderContext as JourneyContext);
                     setCurrentPage(finderContext.getCurrentPage());
                     const PageComponent = PageFactory.create(finderContext.getCurrentPage())
                     setCurrentPageComponent(() => PageComponent);

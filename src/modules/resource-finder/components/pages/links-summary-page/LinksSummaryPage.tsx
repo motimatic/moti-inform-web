@@ -1,11 +1,20 @@
+import {Button} from "@mantine/core";
+import LinksSummaryRow from "./components/LinksSummaryRow.tsx";
+import {useSnapshot} from "valtio/index";
+import {resourceFinderStore} from "../../../state/resourceFinderStore.ts";
 
 
 const LinksSummaryPage = () => {
 
+    const snapshot = useSnapshot(resourceFinderStore);
 
     return (
         <>
-            <h1>Links Summary</h1>
+            <label>{snapshot.context.getCurrentPage()?.title || "No summary available"}</label>
+            <h4>{snapshot.context.getCurrentPage()?.prompt || "No summary available"}</h4>
+            <LinksSummaryRow/>
+            <LinksSummaryRow/>
+            <LinksSummaryRow/>
         </>
     );
 };

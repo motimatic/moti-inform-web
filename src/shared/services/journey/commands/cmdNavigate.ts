@@ -1,6 +1,6 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
 import {PageSerializer} from "../../../models/serializers/pageSerializer.ts";
-import {ResourceFinderContextSerializer} from "../../../models/serializers/resourceFinderContextSerializer.ts";
+import {JourneyContextSerializer} from "../../../models/serializers/journeyContextSerializer.ts";
 
 
 export class CommandNavigate {
@@ -8,7 +8,7 @@ export class CommandNavigate {
     DEFAULT_LIMIT = import.meta.env.VITE_API_DEFAULT_LIMIT;
 
     getUrl() {
-        return  `${this.RESOURCE_FINDER_SERVICE}/navigate/`;
+        return  `${this.RESOURCE_FINDER_SERVICE}/journey/navigate/`;
     }
 
     async run(fromPage=null, action=null, offset=0, limit=this.DEFAULT_LIMIT) {
@@ -45,7 +45,7 @@ export class CommandNavigate {
 
     deserialize(data) {
 
-        const serializer = new ResourceFinderContextSerializer();
+        const serializer = new JourneyContextSerializer();
         const page = serializer.deserialize(data.context);
 
         return page;
@@ -78,8 +78,8 @@ export class CommandNavigate {
                         },
                         {
                             "name": "Identify Challenges",
-                            "title": "Ready to help your student plan for success?",
-                            "prompt": "Select a milestone below",
+                            "title": "How about current challenges? We can help there too.",
+                            "prompt": "What challenges is your student currently facing?",
                             "actions": [
                                 {
                                     "type": "button",
@@ -96,8 +96,8 @@ export class CommandNavigate {
                         },
                         {
                             "name": "Links Summary",
-                            "title": "Ready to help your student plan for success?",
-                            "prompt": "Select a milestone below",
+                            "title": "Resource Links",
+                            "prompt": "Here are the resources we’ve matched for you",
                             "actions": [
                                 {
                                     "type": "button",
