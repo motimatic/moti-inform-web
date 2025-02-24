@@ -9,50 +9,46 @@ import {LandingPageService} from "./shared/services/landing-page/LandingPageServ
 import {useSnapshot} from "valtio/react";
 import {appStore} from "./appStore.ts";
 
-
-const templates = {
+const templates: Record<string, React.ComponentType> = {
     base: BaseTemplate,
     fafsa: FafsaTemplate,
 };
 
-
 function App() {
 
     const [searchParams] = useSearchParams();
-    const [selectedTemplate, setSelectedTemplate] = useState("base");
+    const [selectedTemplate, setSelectedTemplate] = useState<string>("base");
+    console.log("selectedTemplate ", selectedTemplate)
     const TemplateComponent = templates[selectedTemplate];
-
-    const snap = useSnapshot(appStore);
+    useSnapshot(appStore);
 
     const service = new LandingPageService();
 
     useEffect(() => {
-
         const fetchInfo = async () => {
-
             try {
-
                 const adId = searchParams.get("adId");
-
-                const landingPageConfig =  await service.getInfo(adId);
-                if (landingPageConfig) {
-                    setSelectedTemplate(landingPageConfig.template_name);
-                    appStore.setLandingPageConfig(landingPageConfig);
+                if(adId) {
+                    const landingPageConfig =  await service.getInfo(adId);
+                    if (landingPageConfig) {
+                        setSelectedTemplate(landingPageConfig.template_name);
+                        appStore.setLandingPageConfig(landingPageConfig);
+                    }
                 }
+                    
 
             }catch (error){
-
+                console.log("Error App ", error)
             }
         }
 
         fetchInfo().then();
 
-
     }, []);
 
   return (
 
-            <MantineProvider withGlobalStyles withNormalizeCSS>
+            <MantineProvider>
                 <TemplateComponent />
             </MantineProvider>
 

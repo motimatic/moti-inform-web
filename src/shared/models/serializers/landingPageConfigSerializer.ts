@@ -6,7 +6,7 @@ import {BrandSerializer} from "./brandSerializer.ts";
 
 export class LandingPageConfigSerializer extends BaseSerializer {
 
-    public deserialize( data ): LandingPageConfig {
+    public deserialize( data: any ): LandingPageConfig {
 
         const config = new LandingPageConfig();
 

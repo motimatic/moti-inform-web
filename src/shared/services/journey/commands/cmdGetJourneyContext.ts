@@ -1,7 +1,6 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
 import {JourneyContextSerializer} from "../../../models/serializers/journeyContextSerializer.ts";
 
-
 export class CommandNavigate {
     RESOURCE_FINDER_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
     DEFAULT_LIMIT = import.meta.env.VITE_API_DEFAULT_LIMIT;
@@ -14,7 +13,7 @@ export class CommandNavigate {
 
         const url = this.getUrl()
 
-        const params = {
+        const params: any = {
 
             ad_id: adId,
             person: {
@@ -24,14 +23,11 @@ export class CommandNavigate {
 
         try {
 
-            let response = {}
-
-            if( import.meta.env.VITE_API_RUN_LOCAL === "true" ){
-
+            let response: any = {}
+            if( import.meta.env.VITE_API_RUN_LOCAL === "true" )
                 response = await this.getTestData(params);
-            }else{
+            else
                 response = await httpClient.get(url, params);
-            }
 
             return this.deserialize(response.data);
 
@@ -42,15 +38,14 @@ export class CommandNavigate {
 
     }
 
-    deserialize(data) {
-
+    deserialize(data: any) {
         const serializer = new JourneyContextSerializer();
         const page = serializer.deserialize(data.context);
 
         return page;
     }
 
-    private getTestData(params) {
+    private getTestData(params: any) {
 
         const response = {
             data: {

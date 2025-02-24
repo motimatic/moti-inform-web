@@ -3,8 +3,8 @@ import { BaseSerializer } from "./baseSerializer";
 
 
 export class PersonSerializer extends BaseSerializer {
-
-    public deserialize( data ): object {
+    //TODO ADD TYPE
+    public deserialize( data: any ): object {
 
         const person = new Person();
 

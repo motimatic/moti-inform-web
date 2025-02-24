@@ -20,9 +20,9 @@ export abstract class BaseSerializer {
         return jsonString;
     }
 
-    abstract deserialize( data ): object;
+    abstract deserialize( data: any ): object;
 
-    deserializeList( data ): object [] {
+    deserializeList( data: any ): object [] {
 
         if (data === undefined)
             return []
@@ -39,7 +39,7 @@ export abstract class BaseSerializer {
         return itemList;
     }
 
-    _copyAttributes(target, source){
+    _copyAttributes(target: any, source: any){
 
         if (source === null || source === undefined){
             return target;

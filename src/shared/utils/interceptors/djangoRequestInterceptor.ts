@@ -6,11 +6,10 @@
 
 // import {getAuth} from "../../../modules/auth";
 
-
 const djangoRequestInterceptor = () => {
 
     return [
-        config => {
+       (config: any) => {
 
         /*
             let auth = getAuth();
@@ -25,7 +24,7 @@ const djangoRequestInterceptor = () => {
 
             return config;
         },
-        err => Promise.reject(err)
+        (err: any) => Promise.reject(err) 
     ];
 };
 
