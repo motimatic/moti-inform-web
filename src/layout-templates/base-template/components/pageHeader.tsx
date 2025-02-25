@@ -4,8 +4,7 @@ import {appStore} from "../../../appStore.ts";
 
 
 const PageHeader = () => {
-
-    const snap = useSnapshot(appStore);
+    useSnapshot(appStore);
 
     return (
         <div >

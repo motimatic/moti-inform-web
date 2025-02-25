@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import {DateTime}  from 'luxon';
 
 /* ------------------------------------------------
     Handle all of the tz converstion stuff with this class.
@@ -29,94 +29,78 @@ import { DateTime } from 'luxon';
     5pm the next day (in the Sites Tz).
 
  */
-export class AppDate {
-
-    private static defaultTimeZone: string = "America/Los_Angeles"
-    private timeZone: string | null = null;
-    private _dateTime: DateTime;
-    private dateTimeCache: string | null = null;
-
-    constructor() {
-
-        this._dateTime = DateTime.utc()
-    }
-
-    get dateTime(): DateTime {
-        return this._dateTime
-    }
-
-    set dateTime(newValue: DateTime) {
-        this._dateTime = newValue;
-    }
-
-    public parseDate( inputDateTime:string): void {
-
-        // Keep as UTC.  We will convert on the way out the door.
-        this._dateTime = DateTime.fromISO(inputDateTime);
-
-    }
-
-    public toString(): string {
-
-        return this.toFormattedString(DateTime.DATETIME_FULL);
-    }
-
-    public toDate(): string {
-
-        return this.toFormattedString(DateTime.DATE_FULL);
-
-    }
-
-    public toTime(): string {
-
-        return this.toFormattedString(DateTime.TIME_FULL);
-
-    }
-
-    public timeAgo(): string {
-
-        // Calculate the time difference
-        const now = DateTime.now();
-        const elapsed = now.diff(this._dateTime);
-
-        // Format the elapsed time as "X units ago"
-        const formattedElapsed = elapsed.toRelative();
-
-        return formattedElapsed;
-    }
-
-    private toFormattedString( format ): string {
-
-        /*
-        if (this.dateTimeCache !== null){
-            return this.dateTimeCache;
+    export class AppDate {
+    
+        private static defaultTimeZone: string = "America/Los_Angeles";
+        private timeZone: string | null = null;
+        private _dateTime: DateTime;
+        private dateTimeCache: string | null = null;
+    
+        constructor() {
+            this._dateTime = DateTime.utc();
         }
-        */
-
-        if (format === DateTime.TIME_FULL){
-            return this._dateTime.setZone(this.getTimeZone()).toFormat('h:mm a ZZZZ');
+    
+        get dateTime(): DateTime {
+            return this._dateTime;
         }
-
-        const tzString = this._dateTime.setZone(this.getTimeZone()).toLocaleString(format)
-
-        if (this.dateTimeCache === null){
-            this.dateTimeCache = tzString;
+    
+        set dateTime(newValue: DateTime) {
+            this._dateTime = newValue;
         }
-
-        return tzString;
-
-
+    
+        public parseDate(inputDateTime: string): void {
+            // Keep as UTC.  We will convert on the way out the door.
+            this._dateTime = DateTime.fromISO(inputDateTime);
+        }
+    
+        public toString(): string {
+            // Full date-time format
+            return this.toFormattedString("LLLL dd, yyyy, hh:mm a"); // Custom format string
+        }
+    
+        public toDate(): string {
+            // Date format only
+            return this.toFormattedString("LLL dd, yyyy"); // Date format string
+        }
+    
+        public toTime(): string {
+            // Time format only
+            return this.toFormattedString("hh:mm a"); // Time format string
+        }
+    
+        public timeAgo(): string {
+            // Calculate the time difference
+            const now = DateTime.now();
+            
+            // Use the relative method directly on DateTime
+            const formattedElapsed = this._dateTime.toRelative({ base: now });
+        
+            return formattedElapsed || "just now"; // Return a default if `null`
+        }
+        
+        private toFormattedString(format: string): string {
+            // Check cache for performance, avoid reformatting if already done
+            if (this.dateTimeCache !== null) {
+                return this.dateTimeCache;
+            }
+    
+            // Convert to the correct timezone and format
+            const formattedString = this._dateTime.setZone(this.getTimeZone()).toFormat(format);
+    
+            // Cache the result to avoid unnecessary reformatting
+            if (this.dateTimeCache === null) {
+                this.dateTimeCache = formattedString;
+            }
+    
+            return formattedString;
+        }
+    
+        private getTimeZone(): string {
+            if (this.timeZone !== null) {
+                return this.timeZone;
+            }
+    
+            return AppDate.defaultTimeZone;
+        }
     }
-
-    private getTimeZone(): string {
-
-        if (this.timeZone !== null){
-            return this.timeZone;
-        }
-
-        return AppDate.defaultTimeZone;
-    }
-
-
-
-}
+    

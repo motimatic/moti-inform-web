@@ -1,5 +1,4 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
-import {PageSerializer} from "../../../models/serializers/pageSerializer.ts";
 import {JourneyContextSerializer} from "../../../models/serializers/journeyContextSerializer.ts";
 
 
@@ -11,11 +10,11 @@ export class CommandNavigate {
         return  `${this.RESOURCE_FINDER_SERVICE}/journey/navigate/`;
     }
 
-    async run(fromPage=null, action=null, offset=0, limit=this.DEFAULT_LIMIT) {
+    async run(fromPage: string  | null  = null, action=null, offset=0, limit=this.DEFAULT_LIMIT) {
 
         const url = this.getUrl()
 
-        const params = {
+        const params: any = {
 
             from_page: fromPage,
             action: action,
@@ -25,14 +24,12 @@ export class CommandNavigate {
 
         try {
 
-            let response = {}
+            let response: any = {}
 
-            if( import.meta.env.VITE_API_RUN_LOCAL === "true" ){
-
+            if( import.meta.env.VITE_API_RUN_LOCAL === "true" )
                 response = await this.getTestData(params);
-            }else{
+            else
                 response = await httpClient.get(url, params);
-            }
 
             return this.deserialize(response.data);
 
@@ -43,15 +40,14 @@ export class CommandNavigate {
 
     }
 
-    deserialize(data) {
-
+    deserialize(data: any) : any{
         const serializer = new JourneyContextSerializer();
         const page = serializer.deserialize(data.context);
 
         return page;
     }
 
-    private getTestData(params) {
+    private getTestData(params: any) {
 
         const response = {
             data: {

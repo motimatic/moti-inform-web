@@ -1,7 +1,3 @@
-import { Button } from '@mantine/core';
-import { IconArrowRight } from '@tabler/icons-react';
-import { resourceFinderStore } from '../../state/resourceFinderStore.ts'
-
 
 const MetricPanel = () => {
 

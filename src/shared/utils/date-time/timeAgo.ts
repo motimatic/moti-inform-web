@@ -1,5 +1,5 @@
-import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
-import { utcToZonedTime } from 'date-fns-tz';
+import { formatDistanceToNowStrict } from "date-fns";
+import { toZonedTime } from 'date-fns-tz';
 
 export function timeAgo(utcDateTimeString: string): string {
 
@@ -12,7 +12,7 @@ export function timeAgo(utcDateTimeString: string): string {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     // Convert UTC datetime string to browser's timezone
-    const dateInBrowserTimezone = utcToZonedTime(new Date(utcDateTimeString), timezone);
+    const dateInBrowserTimezone = toZonedTime(new Date(utcDateTimeString), timezone);
 
     // Format to time ago
     const timeAgo = formatDistanceToNowStrict(dateInBrowserTimezone, { addSuffix: true });

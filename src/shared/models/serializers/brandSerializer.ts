@@ -4,7 +4,7 @@ import {Brand} from "../brand.model.ts";
 
 export class BrandSerializer extends BaseSerializer {
 
-    public deserialize( data ): Brand {
+    public deserialize( data: any ): Brand {
 
         const brand = new Brand();
 

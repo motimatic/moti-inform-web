@@ -4,7 +4,7 @@ import {PageAction} from "../pageAction.model.ts";
 
 export class PageActionSerializer extends BaseSerializer {
 
-    public deserialize( data ): PageAction {
+    public deserialize( data: any ): PageAction {
 
         const action = new PageAction();
 

@@ -1,9 +1,5 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
-import { PersonSerializer } from "../../../models/serializers/personSerializer";
 import {LandingPageConfigSerializer} from "../../../models/serializers/landingPageConfigSerializer.ts";
-import {Brand} from "../../../models/brand.model.ts";
-
-
 export class CommandGetLandingPageConfig {
     PERSON_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
 
@@ -11,24 +7,22 @@ export class CommandGetLandingPageConfig {
         return  `${this.PERSON_SERVICE}/landing_page/config/`;
     }
 
-    async run(adId) {
+    async run(adId: string) {
 
         const url = this.getUrl()
-
-        const params = {
+        //TODO: add type to params
+        const params: any = {
             ad_id: adId
         }
 
         try {
 
-            let response = {}
+            let response: any = {}
 
-            if( import.meta.env.VITE_API_RUN_LOCAL === "true" ){
-
+            if( import.meta.env.VITE_API_RUN_LOCAL === "true" )
                 response = await this.getTestData(params);
-            }else{
+            else
                 response = await httpClient.get(url, params);
-            }
 
             return this.deserialize(response.data);
         } catch (error) {
@@ -39,8 +33,8 @@ export class CommandGetLandingPageConfig {
         }
 
     }
-
-    deserialize(data) {
+    //TODO ADD TYPE
+    deserialize(data: any) {
 
         const serializer = new LandingPageConfigSerializer();
         const landingPageConfig = serializer.deserialize(data);
@@ -48,7 +42,7 @@ export class CommandGetLandingPageConfig {
         return landingPageConfig;
     }
 
-    private getTestData(params) {
+    private getTestData(params: any) {
 
         const response = {
             data: {
