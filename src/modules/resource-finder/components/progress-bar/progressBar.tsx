@@ -4,7 +4,7 @@ const ProgressBar = () => {
 
 
     return (
-        <div style={{padding: '20px'}}>
+        <div className='py-5'>
             <Progress radius="xl" size="xl" value={60} />
         </div>
     );

@@ -22,7 +22,7 @@ export abstract class BaseSerializer {
 
     abstract deserialize( data: any ): object;
 
-    deserializeList( data: any ): object [] {
+    deserializeList( data: any ): any [] {
 
         if (data === undefined)
             return []

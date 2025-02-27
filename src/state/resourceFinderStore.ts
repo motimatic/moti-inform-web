@@ -1,5 +1,5 @@
 import { proxy } from 'valtio';
-import {JourneyContext} from "../../../shared/models/journeyContext.model.ts";
+import { JourneyContext } from '../shared/models/journeyContext.model';
 
 export const resourceFinderStore = proxy({
     context: new JourneyContext(),

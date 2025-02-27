@@ -1,7 +1,6 @@
 import {Button} from "@mantine/core";
 import { useSnapshot } from "valtio";
-import { resourceFinderStore } from "../../../state/resourceFinderStore.ts";
-
+import { resourceFinderStore } from "../../../../../state/resourceFinderStore";
 const IdentifyChallengesPage = () => {
 
     const snapshot = useSnapshot(resourceFinderStore);

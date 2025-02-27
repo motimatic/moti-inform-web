@@ -1,6 +1,6 @@
+import { resourceFinderStore } from "../../../../../state/resourceFinderStore.ts";
 import LinksSummaryRow from "./components/LinksSummaryRow.tsx";
 import {useSnapshot} from "valtio/index";
-import {resourceFinderStore} from "../../../state/resourceFinderStore.ts";
 
 
 const LinksSummaryPage = () => {
