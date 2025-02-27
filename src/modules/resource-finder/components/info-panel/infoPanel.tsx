@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {useSnapshot} from "valtio/react";
-import {resourceFinderStore} from "../../state/resourceFinderStore.ts";
 import MetricPanel from "./components/metric-panel/metricPanel.tsx";
 import TextPanel from "./components/text-panel/textPanel.tsx";
+import { resourceFinderStore } from "../../../../state/resourceFinderStore.ts";
 
 const infoPanels: Record<string, React.ComponentType> = {
     "metric": MetricPanel,
@@ -23,7 +23,7 @@ const InfoPanel = () => {
     }, [resourceFinderStore.buttonClicked]);
 
     return (
-        <div style={{padding:'10px'}}>
+        <div>
             <CurrentInfoPanel />
         </div>
     );

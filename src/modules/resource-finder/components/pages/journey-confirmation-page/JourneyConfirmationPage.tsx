@@ -1,7 +1,6 @@
 import { Button } from '@mantine/core';
 import {useSnapshot} from "valtio/index";
-import {resourceFinderStore} from "../../../state/resourceFinderStore.ts";
-
+import { resourceFinderStore } from '../../../../../state/resourceFinderStore';
 
 const JourneyConfirmationPage = () => {
 
@@ -11,19 +10,11 @@ const JourneyConfirmationPage = () => {
         <>
             <label>{snapshot.context.getCurrentPage()?.title || "No summary available"}</label>
             <h4>{snapshot.context.getCurrentPage()?.prompt || "No summary available"}</h4>
-            <div style={{display: 'flex', flexWrap: 'wrap'}}>
-                <div style={{padding: '10px'}}>
-                    <Button variant="filled">Returning to School</Button>
-                </div>
-                <div style={{padding: '10px'}}>
-                    <Button variant="filled">First Time Student</Button>
-                </div>
-                <div style={{padding: '10px'}}>
-                    <Button variant="filled">Applying</Button>
-                </div>
-                <div style={{padding: '10px'}}>
-                    <Button variant="filled">Financial Preparation</Button>
-                </div>
+            <div className='flex flex-wrap'>
+                    <Button className='mx-2 my-2' variant="filled">Returning to School</Button>
+                    <Button className='mx-2 my-2' variant="filled">First Time Student</Button>
+                    <Button className='mx-2 my-2' variant="filled">Applying</Button>
+                    <Button className='mx-2 my-2'variant="filled">Financial Preparation</Button>
             </div>
         </>
     );

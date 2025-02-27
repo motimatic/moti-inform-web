@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
-import {resourceFinderStore} from "../../state/resourceFinderStore.ts";
 import {useSnapshot} from "valtio/react";
 import {PageFactory} from "./pageFactory.ts";
 import {Page} from "../../../../shared/models/page.model.ts";
 import {JourneyService} from "../../../../shared/services/journey/journeyService.ts";
 import {JourneyContext} from "../../../../shared/models/journeyContext.model.ts";
+import { resourceFinderStore } from "../../../../state/resourceFinderStore.ts";
 
 
 const PageRenderer = () => {
