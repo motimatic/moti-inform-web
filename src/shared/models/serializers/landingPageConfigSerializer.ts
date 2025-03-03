@@ -13,7 +13,7 @@ export class LandingPageConfigSerializer extends BaseSerializer {
         this._copyAttributes(config, data);
 
         const brandSerializer = new BrandSerializer();
-        config.brand_info = brandSerializer.deserialize(data.brand_info);
+        config.brand = brandSerializer.deserialize(data.brand);
 
         return config;
 

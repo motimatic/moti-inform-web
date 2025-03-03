@@ -31,7 +31,7 @@ function App() {
                 if(adId) {
                     const landingPageConfig =  await service.getInfo(adId);
                     if (landingPageConfig) {
-                        setSelectedTemplate(landingPageConfig.template_name);
+                        setSelectedTemplate("base");
                         appStore.setLandingPageConfig(landingPageConfig);
                     }
                 }

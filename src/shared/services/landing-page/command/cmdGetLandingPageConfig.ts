@@ -3,27 +3,24 @@ import {LandingPageConfigSerializer} from "../../../models/serializers/landingPa
 export class CommandGetLandingPageConfig {
     PERSON_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
 
-    getUrl() {
-        return  `${this.PERSON_SERVICE}/landing_page/config/`;
+    getUrl(adId: string) {
+        //const origin = window.location.origin;
+        return  `http://localhost:5000/api/v1/landing_pages/configs/?ad_id=123456&url=https://www.pima.edu/`;
     }
 
     async run(adId: string) {
 
-        const url = this.getUrl()
-        //TODO: add type to params
+        const url = this.getUrl(adId);
         const params: any = {
             ad_id: adId
         }
-
+      
         try {
-
             let response: any = {}
-
-            if( import.meta.env.VITE_API_RUN_LOCAL === "true" )
+            if( import.meta.env.VITE_API_RUN_LOCAL === "true")
                 response = await this.getTestData(params);
             else
                 response = await httpClient.get(url, params);
-
             return this.deserialize(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -33,9 +30,7 @@ export class CommandGetLandingPageConfig {
         }
 
     }
-    //TODO ADD TYPE
     deserialize(data: any) {
-
         const serializer = new LandingPageConfigSerializer();
         const landingPageConfig = serializer.deserialize(data);
 
@@ -48,14 +43,18 @@ export class CommandGetLandingPageConfig {
             data: {
                 analytics_tracking_code: '123',
                 template_name: 'base',
-                brand_info: {
+                brand: {
                     name: "Pima",
                     logo_url: "https://pima.edu/_files/images/logo-white.svg",
-                    company_site_url: "",
+                    company_site_url: "https://www.pima.edu/",
                     primary_color_code: "#3B54BE",
                     secondary_color_code: "#85BDF2",
                     tertiary_color_code: "#D79A47",
-                    tag_line: "Make Someday Today"
+                    tag_line: "Make Someday Today",
+                    ad: {
+                        media_url: "https://pima.edu/_files/images/logo-white.svg",
+                      
+                    }
                 }
             }
         }

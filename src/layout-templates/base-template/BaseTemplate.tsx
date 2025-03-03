@@ -3,6 +3,7 @@ import ResourceFinder from "../../modules/resource-finder/ResourceFinder.tsx";
 import PageHeader from "./components/pageHeader.tsx";
 import AdBanner from './components/adBanner.tsx';
 import QuickLinksComponent from '../../modules/quick-links/QuickLinksComponent.tsx';
+import Footer from './components/footer.tsx';
 
 const BaseTemplate = () => (
     <>
@@ -19,8 +20,8 @@ const BaseTemplate = () => (
             <Grid.Col span={12}>
                 <ResourceFinder />
             </Grid.Col>
-            <Grid.Col span={12} style={{ background: '#b8e994', textAlign: 'center' }}>
-                Footer
+            <Grid.Col span={12}>
+                <Footer/>
             </Grid.Col>
         </Grid>
     </>
