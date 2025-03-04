@@ -3,7 +3,7 @@ import {LandingPageConfigSerializer} from "../../../models/serializers/landingPa
 export class CommandGetLandingPageConfig {
     PERSON_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
 
-    getUrl(adId: string) {
+    getUrl(_adId: string) {
         //const origin = window.location.origin;
         return  `http://localhost:5000/api/v1/landing_pages/configs/?ad_id=123456&url=https://www.pima.edu/`;
     }
