@@ -11,7 +11,7 @@ const PageHeader = () => {
                     <Image
                         width={100}
                         fit="contain"
-                        src={appStore.landingPageConfig.brand_info.logo_url}
+                        src={appStore.landingPageConfig.brand.logo_url}
                     />
                 </figure>
            </Grid.Col>

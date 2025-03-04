@@ -32,7 +32,7 @@ const QuickLinksComponent = () => {
                 {
                     data.map((link: QuickLinks)=>{
                         return (
-                            <Grid.Col span={{ base: 12 }} className="">
+                            <Grid.Col span={{ base: 12 }} key={link.id}>
                                 <Container className="pb-0 text-left mb-3 border border-gray-300 rounded-xs">
                                     <Grid className="py-3">
                                         <Grid.Col  span={{sm: 12, md: 9, lg: 9}}>
@@ -45,6 +45,7 @@ const QuickLinksComponent = () => {
                                         </Grid.Col>
                                         <Grid.Col span={{sm: 12, md: 3, lg: 3}}>
                                             <Button 
+                                                color="yellow"
                                                 size="sm" 
                                             >
                                                 {link.action}
