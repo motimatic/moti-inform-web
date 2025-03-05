@@ -5,8 +5,7 @@ import { Image } from '@mantine/core';
 
 const AdBanner = () => {
     useSnapshot(appStore);
-    console.log('Media URL');
-    console.log(appStore.landingPageConfig.ad.media_url);
+
     return (
         <div >
             <Image

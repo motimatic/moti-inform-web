@@ -10,8 +10,6 @@ export class LandingPageConfigSerializer extends BaseSerializer {
 
     public deserialize( data: any ): LandingPageConfig {
 
-        console.log('desearializing ad.');
-
         const config = new LandingPageConfig();
 
         this._copyAttributes(config, data);
@@ -22,7 +20,6 @@ export class LandingPageConfigSerializer extends BaseSerializer {
         const quickLinkSerializer = new QuickLinkSerializer();
         const links = data.quick_links.map((link:any) => quickLinkSerializer.deserialize(link));
 
-        console.log('desearializing ad.');
         const adSerializer = new AdSerializer();
         config.ad = adSerializer.deserialize(data.ad);
 
