@@ -1,54 +1,41 @@
-
 import {Button, Container, Grid, Text, Title} from "@mantine/core";
-import { useEffect } from "react";
-import { quickLinksStore } from "../../state/quickLinksStore.ts";
 import { useSnapshot } from "valtio";
-import { QuickLinksService } from "../../shared/services/quick-links/journeyService.ts";
-import { QuickLinks } from "../../shared/models/quiclLinks.model.ts";
+import {appStore} from "../../appStore.ts";
+import {QuickLink} from "../../shared/models/quickLink.model.ts";
 
 const QuickLinksComponent = () => {
-    useSnapshot(quickLinksStore);
-    const { data } = quickLinksStore;
-    useEffect(()=>{
-        const fetchQuickLinks = async () => {
+    useSnapshot(appStore);
 
-            try {
-                const service = new QuickLinksService();
-                const response =  await service.getQuickLinks();
-                if (response) {
-                    quickLinksStore.setData(response);
-                }
-            }catch (error){
+    const handleOpenNewTab = (url: string) => {
+        window.open(url, "_blank", "noopener,noreferrer");
+    };
 
-            }
-        }
-        fetchQuickLinks();
-    },[])
-    console.log("data ", data)
+
     return (
         <Container className="mt-4">
             <Title order={4}>Quick Links</Title>
             <Grid columns={12} gutter={0} className="py-4">
                 {
-                    data.map((link: QuickLinks)=>{
+                    appStore.landingPageConfig.quickLinks.map((link: QuickLink)=>{
                         return (
                             <Grid.Col span={{ base: 12 }} key={link.id}>
                                 <Container className="pb-0 text-left mb-3 border border-gray-300 rounded-xs">
                                     <Grid className="py-3">
                                         <Grid.Col  span={{sm: 12, md: 9, lg: 9}}>
                                             <Container px={0}> 
-                                                <Title order={6}>{link.name}</Title>
+                                                <Title order={6}>{link.title}</Title>
                                             </Container>
                                             <Container px={0} className="px-0 mx-0">
-                                                <Text size={"sm"}>{link.description}</Text>
+                                                <Text size={"sm"}>{link.subtitle}</Text>
                                             </Container>
                                         </Grid.Col>
                                         <Grid.Col span={{sm: 12, md: 3, lg: 3}}>
-                                            <Button 
+                                            <Button
                                                 color="yellow"
-                                                size="sm" 
+                                                size="sm"
+                                                onClick={() => handleOpenNewTab(link.link)}
                                             >
-                                                {link.action}
+                                                {link.label}
                                             </Button>
                                         </Grid.Col>
                                     </Grid>

@@ -1,11 +1,11 @@
 import { BaseSerializer } from "./baseSerializer";
-import { QuickLinks } from "../quiclLinks.model.ts";
+import { QuickLink } from "../quickLink.model.ts";
 
 
-export class QuickLinksSerializer extends BaseSerializer {
+export class QuickLinkSerializer extends BaseSerializer {
 
     public deserialize( data: any ): any {
-        const ql = new QuickLinks();
+        const ql = new QuickLink();
         this._copyAttributes(ql, data);
         return ql;
 

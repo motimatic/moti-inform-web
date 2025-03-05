@@ -1,15 +1,20 @@
 import {useSnapshot} from "valtio/react";
 import {appStore} from "../../../appStore.ts";
+import { Image } from '@mantine/core';
 
 
 const AdBanner = () => {
     useSnapshot(appStore);
+    console.log('Media URL');
+    console.log(appStore.landingPageConfig.ad.media_url);
     return (
-        <div className='' >
-            <figure  className=''>
-                {/* <Image
-                    src={appStore.landingPageConfig.ad.media_url}
-                /> */}
+        <div >
+            <Image
+                radius="md"
+                src={appStore.landingPageConfig.ad.media_url}
+            />
+
+                {/*
                  <video
                         key={appStore.landingPageConfig.ad.media_url}
                         width="100%"
@@ -24,7 +29,7 @@ const AdBanner = () => {
                         />
                         Your browser does not support the video tag.
                       </video>
-            </figure>
+                      */}
         </div>
     );
 };

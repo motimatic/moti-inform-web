@@ -1,16 +1,16 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
 import {LandingPageConfigSerializer} from "../../../models/serializers/landingPageConfigSerializer.ts";
 export class CommandGetLandingPageConfig {
-    PERSON_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
 
-    getUrl(_adId: string) {
-        //const origin = window.location.origin;
-        return  `http://localhost:5000/api/v1/landing_pages/configs/?ad_id=123456&url=https://www.pima.edu/`;
+    LANDING_PAGE_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
+
+    getUrl(adId: string, page_url:string) {
+        return `${this.LANDING_PAGE_SERVICE}/landing_pages/configs/?ad_id=${adId}&url=${page_url}`;
     }
 
-    async run(adId: string) {
+    async run(adId: string, page_url:string) {
 
-        const url = this.getUrl(adId);
+        const url = this.getUrl(adId, page_url);
         const params: any = {
             ad_id: adId
         }

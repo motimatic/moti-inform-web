@@ -27,15 +27,16 @@ function App() {
     useEffect(() => {
         const fetchInfo = async () => {
             try {
+                console.log('calling');
+                const page_url = window.location.hostname;
                 const adId = searchParams.get("adId");
                 if(adId) {
-                    const landingPageConfig =  await service.getInfo(adId);
+                    const landingPageConfig =  await service.getInfo(adId, page_url);
                     if (landingPageConfig) {
-                        setSelectedTemplate("base");
+                        setSelectedTemplate(landingPageConfig.template_name);
                         appStore.setLandingPageConfig(landingPageConfig);
                     }
                 }
-                    
 
             }catch (error){
                 console.log("Error App ", error)
