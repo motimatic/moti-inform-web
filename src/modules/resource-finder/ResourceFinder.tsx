@@ -3,14 +3,18 @@ import ProgressBar from "./components/progress-bar/progressBar.tsx";
 import ButtonBar from "./components/button-bar/buttonBar.tsx";
 import {Grid, Title} from "@mantine/core";
 import InfoPanel from "./components/info-panel/infoPanel.tsx";
+import { useSnapshot } from "valtio";
+import { resourceFinderStore } from "../../state/resourceFinderStore.ts";
 
 const ResourceFinder = () => {
-
+    const snapshot = useSnapshot(resourceFinderStore);
+    const { current_page, pages} = snapshot.context;
+    const currentProgress = ((current_page + 1) / pages.length )* 100;
     return (
         <Grid columns={12} gutter={0} style={{ margin: 0 }}>
             <Grid.Col span={{sm:12, md:9}} p={20} m={0}>
                 <Title order={3} >Resource Finder</Title>
-                <ProgressBar/>
+                <ProgressBar currentProgress={currentProgress}/>
                 <PageRenderer/>
                 <ButtonBar/>
             </Grid.Col>
