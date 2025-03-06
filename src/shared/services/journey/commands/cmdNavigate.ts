@@ -61,7 +61,7 @@ export class CommandNavigate {
                             "actions": [
                                 {
                                     "type": "button",
-                                    "label": "Next Question >"
+                                    "label": "Next Question"
                                 }
                             ],
                             "summary": {
@@ -70,8 +70,28 @@ export class CommandNavigate {
                                 "value": "150",
                                 "post": "resource links available",
                                 "prompt": "Let's personalize your journey"
-                            }
+                            },
+                            "action_buttons": [
+                                {
+                                   value: "1",
+                                   label: "Returning to School"
+                                },
+                                {
+                                   value: "2",
+                                   label: "First Time Student"
+                                },
+                                {
+                                    value: "3",
+                                    label: "Applying"
+                                },
+                                {
+                                    value: "4",
+                                    label: "Financial Preparation"
+                                 }
+                            ]
+                            
                         },
+                        
                         {
                             "name": "Identify Challenges",
                             "title": "How about current challenges? We can help there too.",
@@ -79,7 +99,7 @@ export class CommandNavigate {
                             "actions": [
                                 {
                                     "type": "button",
-                                    "label": "Next Question >"
+                                    "label": "Next Question"
                                 }
                             ],
                             "summary": {
@@ -88,7 +108,29 @@ export class CommandNavigate {
                                 "value": "150",
                                 "post": "resource links available",
                                 "prompt": "Let's personalize your journey"
-                            }
+                            },
+                            "action_buttons": [
+                                {
+                                   value: "1",
+                                   label: "Financial"
+                                },
+                                {
+                                   value: "2",
+                                   label: "Academic"
+                                },
+                                {
+                                    value: "3",
+                                    label: "Wellness"
+                                },
+                                {
+                                    value: "4",
+                                    label: "Relationships"
+                                },
+                                {
+                                    value: "5",
+                                    label: "Scheduling"
+                                }
+                            ]
                         },
                         {
                             "name": "Links Summary",
@@ -97,7 +139,7 @@ export class CommandNavigate {
                             "actions": [
                                 {
                                     "type": "button",
-                                    "label": "Next Question >"
+                                    "label": "Finish"
                                 }
                             ],
                             "summary": {

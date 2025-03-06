@@ -61,7 +61,7 @@ export class CommandContext {
                             "actions": [
                                 {
                                     "type": "button",
-                                    "label": "Next Question >"
+                                    "label": "Next Question"
                                 }
                             ],
                             "summary": {
@@ -79,7 +79,7 @@ export class CommandContext {
                             "actions": [
                                 {
                                     "type": "button",
-                                    "label": "Next Question >"
+                                    "label": "Next Question"
                                 }
                             ],
                             "summary": {
@@ -97,7 +97,7 @@ export class CommandContext {
                             "actions": [
                                 {
                                     "type": "button",
-                                    "label": "Next Question >"
+                                    "label": "Next Question"
                                 }
                             ],
                             "summary": {
