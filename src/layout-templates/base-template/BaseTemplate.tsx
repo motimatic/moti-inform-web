@@ -11,7 +11,7 @@ const BaseTemplate = () => (
             <Grid.Col span={12} style={{ background: 'white', textAlign: 'center' }}>
                 <PageHeader />
             </Grid.Col>
-            <Grid.Col span={12} style={{ background: '#6588de', textAlign: 'center' }}>
+            <Grid.Col span={12}>
                 <AdBanner/>
             </Grid.Col>
             <Grid.Col span={12}>

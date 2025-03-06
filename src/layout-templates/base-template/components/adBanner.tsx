@@ -1,35 +1,17 @@
 import {useSnapshot} from "valtio/react";
 import {appStore} from "../../../appStore.ts";
-import { Image } from '@mantine/core';
-
+import { getExtension } from "../../../shared/utils/common.ts";
+import RenderVideo from "./renderVideo.tsx";
+import RenderImage from "./renderImage.tsx";
 
 const AdBanner = () => {
     useSnapshot(appStore);
-
+    const mediaType = getExtension(appStore.landingPageConfig.ad.media_url);
     return (
-        <div >
-            <Image
-                radius="md"
-                src={appStore.landingPageConfig.ad.media_url}
-            />
-
-                {/*
-                 <video
-                        key={appStore.landingPageConfig.ad.media_url}
-                        width="100%"
-                        controls
-                        autoPlay
-                        muted
-                        loop
-                      >
-                        <source
-                          src={appStore.landingPageConfig.ad.media_url}
-                          type="video/mp4"
-                        />
-                        Your browser does not support the video tag.
-                      </video>
-                      */}
-        </div>
+            mediaType == "mp4" ? 
+            <RenderVideo url={appStore.landingPageConfig.ad.media_url} /> :
+            <RenderImage url={appStore.landingPageConfig.ad.media_url} />
+        
     );
 };
 

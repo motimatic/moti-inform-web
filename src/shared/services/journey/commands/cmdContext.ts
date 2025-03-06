@@ -1,29 +1,31 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
 import {JourneyContextSerializer} from "../../../models/serializers/journeyContextSerializer.ts";
 
+
 export class CommandContext {
     RESOURCE_FINDER_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
     DEFAULT_LIMIT = import.meta.env.VITE_API_DEFAULT_LIMIT;
 
     getUrl() {
-        return  `${this.RESOURCE_FINDER_SERVICE}/journey/contexts/`;
+        return  `${this.RESOURCE_FINDER_SERVICE}/journey/navigate/`;
     }
 
-    async run(adId: string | null = null, personId: string | null = null) {
+    async run(fromPage: string  | null  = null, action=null, offset=0, limit=this.DEFAULT_LIMIT) {
 
         const url = this.getUrl()
 
         const params: any = {
 
-            ad_id: adId,
-            person: {
-                'id': personId
-            }
+            from_page: fromPage,
+            action: action,
+            offset: offset,
+            limit: limit
         }
 
         try {
 
             let response: any = {}
+
             if( import.meta.env.VITE_API_RUN_LOCAL === "true" )
                 response = await this.getTestData(params);
             else
@@ -38,7 +40,7 @@ export class CommandContext {
 
     }
 
-    deserialize(data: any) {
+    deserialize(data: any) : any{
         const serializer = new JourneyContextSerializer();
         const page = serializer.deserialize(data.context);
 
@@ -81,7 +83,7 @@ export class CommandContext {
                                 }
                             ],
                             "summary": {
-                                "type": "metric",
+                                "type": "text",
                                 "pre": "We have over",
                                 "value": "150",
                                 "post": "resource links available",

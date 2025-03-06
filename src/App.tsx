@@ -18,7 +18,6 @@ function App() {
 
     const [searchParams] = useSearchParams();
     const [selectedTemplate, setSelectedTemplate] = useState<string>("base");
-    console.log("selectedTemplate ", selectedTemplate)
     const TemplateComponent = templates[selectedTemplate];
     useSnapshot(appStore);
 
@@ -27,7 +26,6 @@ function App() {
     useEffect(() => {
         const fetchInfo = async () => {
             try {
-                console.log('calling');
                 const page_url = window.location.hostname;
                 const adId = searchParams.get("adId");
                 if(adId) {

@@ -1,3 +1,4 @@
+import { CommandContext } from "./commands/cmdGetJourneyContext.ts";
 import {CommandNavigate} from "./commands/cmdNavigate.ts";
 
 
@@ -7,6 +8,13 @@ export class JourneyService {
 
         const cmd = new CommandNavigate();
         const results = cmd.run(fromPage, action, offset, limit);
+
+        return results
+    }
+
+    context(adId: string, personId: string | null) {
+        const cmd = new CommandContext();
+        const results = cmd.run(adId, personId);
 
         return results
     }
