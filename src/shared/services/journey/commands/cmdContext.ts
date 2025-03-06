@@ -1,31 +1,22 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
 import {JourneyContextSerializer} from "../../../models/serializers/journeyContextSerializer.ts";
-
-
 export class CommandContext {
     RESOURCE_FINDER_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
     DEFAULT_LIMIT = import.meta.env.VITE_API_DEFAULT_LIMIT;
 
-    getUrl() {
-        return  `${this.RESOURCE_FINDER_SERVICE}/journey/navigate/`;
+    getUrl(adId: string, page_url:string) {
+        return  `${this.RESOURCE_FINDER_SERVICE}/journeys/contexts/?ad_id=${adId}&url=${page_url}`;
     }
 
-    async run(fromPage: string  | null  = null, action=null, offset=0, limit=this.DEFAULT_LIMIT) {
+    async run(adId: string, page_url:string) {
 
-        const url = this.getUrl()
-
+        const url = this.getUrl(adId, page_url);
         const params: any = {
-
-            from_page: fromPage,
-            action: action,
-            offset: offset,
-            limit: limit
+            ad_id: adId,
         }
 
         try {
-
             let response: any = {}
-
             if( import.meta.env.VITE_API_RUN_LOCAL === "true" )
                 response = await this.getTestData(params);
             else
@@ -42,8 +33,7 @@ export class CommandContext {
 
     deserialize(data: any) : any{
         const serializer = new JourneyContextSerializer();
-        const page = serializer.deserialize(data.context);
-
+        const page = serializer.deserialize(data);
         return page;
     }
 
@@ -51,74 +41,71 @@ export class CommandContext {
 
         const response = {
             data: {
-                context: {
-                    current_page: 0,
-                    pages: [
+                    "current_page": 0,
+                    "pages": [
                         {
                             "name": "Journey Confirmation",
                             "title": "Ready to help your student plan for success?",
                             "prompt": "Select a milestone below",
-                            "actions": [
-                                {
-                                    "type": "button",
-                                    "label": "Next Question"
-                                }
-                            ],
                             "summary": {
                                 "type": "metric",
                                 "pre": "We have over",
                                 "value": "150",
-                                "post": "resource links available",
+                                "post": "resource links available.",
                                 "prompt": "Let's personalize your journey"
-                            }
-                        },
-                        {
-                            "name": "Identify Challenges",
-                            "title": "How about current challenges? We can help there too.",
-                            "prompt": "What challenges is your student currently facing?",
-                            "actions": [
-                                {
-                                    "type": "button",
-                                    "label": "Next Question"
-                                }
-                            ],
-                            "summary": {
-                                "type": "text",
-                                "pre": "We have over",
-                                "value": "150",
-                                "post": "resource links available",
-                                "prompt": "Let's personalize your journey"
-                            }
-                        },
-                        {
-                            "name": "Links Summary",
-                            "title": "Resource Links",
-                            "prompt": "Here are the resources we’ve matched for you",
-                            "actions": [
-                                {
-                                    "type": "button",
-                                    "label": "Next Question"
-                                }
-                            ],
-                            "summary": {
-                                "type": "metric",
-                                "pre": "We have over",
-                                "value": "150",
-                                "post": "resource links available",
-                                "prompt": "Let's personalize your journey"
+                            },
+                            "form_data": {
+                                "name": "Milestone Selector",
+                                "description": "This is the form to grab milestone information",
+                                "sections": [
+                                    {
+                                        "name": "Collector",
+                                        "fields": [
+                                            {
+                                                "type": "selector",
+                                                "label": "Returning to School",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "First Time Student",
+                                                "value": "2"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "Applying",
+                                                "value": "3"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "Financial Preparation",
+                                                "value": "4"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "Actions",
+                                        "fields": [
+                                            {
+                                                "type": "button",
+                                                "label": "Next Question >",
+                                                "value": "5"
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
                         }
                     ]
-                }
             }
         }
 
         if (params.from_page == 'Journey Confirmation'){
-            response.data.context.current_page = 1;
+            response.data.current_page = 1;
         }
 
         if (params.from_page == 'Identify Challenges'){
-            response.data.context.current_page = 2;
+            response.data.current_page = 2;
         }
 
         return response;

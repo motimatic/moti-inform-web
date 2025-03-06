@@ -12,14 +12,14 @@ const QuickLinksComponent = () => {
 
 
     return (
-        <Container className="mt-4">
+        <Container fluid className="mt-4 flex flex-col items-start">
             <Title order={4}>Quick Links</Title>
             <Grid columns={12} gutter={0} className="py-4">
                 {
                     appStore.landingPageConfig.quickLinks.map((link: QuickLink)=>{
                         return (
                             <Grid.Col span={{ base: 12 }} key={link.id}>
-                                <Container className="pb-0 text-left mb-3 border border-gray-300 rounded-xs">
+                                <Container fluid className=" pb-0 text-left mb-3 border border-gray-300 rounded-xs">
                                     <Grid className="py-3">
                                         <Grid.Col  span={{sm: 12, md: 9, lg: 9}}>
                                             <Container px={0}> 

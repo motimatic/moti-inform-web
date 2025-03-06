@@ -14,8 +14,7 @@ export class CommandNavigate {
 
         const url = this.getUrl()
 
-        const params: any = {
-
+        const body: any = {
             from_page: fromPage,
             action: action,
             offset: offset,
@@ -27,9 +26,9 @@ export class CommandNavigate {
             let response: any = {}
 
             if( import.meta.env.VITE_API_RUN_LOCAL === "true" )
-                response = await this.getTestData(params);
+                response = await this.getTestData(body);
             else
-                response = await httpClient.get(url, params);
+                response = await httpClient.post(url, body);
 
             return this.deserialize(response.data);
 
@@ -40,10 +39,9 @@ export class CommandNavigate {
 
     }
 
-    deserialize(data: any) : any{
+    deserialize(data: any) : any {
         const serializer = new JourneyContextSerializer();
         const page = serializer.deserialize(data.context);
-
         return page;
     }
 
@@ -58,12 +56,6 @@ export class CommandNavigate {
                             "name": "Journey Confirmation",
                             "title": "Ready to help your student plan for success?",
                             "prompt": "Select a milestone below",
-                            "actions": [
-                                {
-                                    "type": "button",
-                                    "label": "Next Question"
-                                }
-                            ],
                             "summary": {
                                 "type": "metric",
                                 "pre": "We have over",
@@ -71,24 +63,47 @@ export class CommandNavigate {
                                 "post": "resource links available",
                                 "prompt": "Let's personalize your journey"
                             },
-                            "action_buttons": [
-                                {
-                                   value: "1",
-                                   label: "Returning to School"
-                                },
-                                {
-                                   value: "2",
-                                   label: "First Time Student"
-                                },
-                                {
-                                    value: "3",
-                                    label: "Applying"
-                                },
-                                {
-                                    value: "4",
-                                    label: "Financial Preparation"
-                                 }
-                            ]
+                            "form_data": {
+                                "name": "Milestone Selector",
+                                "description": "This is the form to grab milestone information",
+                                "sections": [
+                                    {
+                                        "name": "Collector",
+                                        "fields": [
+                                            {
+                                                "type": "selector",
+                                                "label": "Returning to School",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "First Time Student",
+                                                "value": "2"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "Applying",
+                                                "value": "3"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "Financial Preparation",
+                                                "value": "4"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "Actions",
+                                        "fields": [
+                                            {
+                                                "type": "button",
+                                                "label": "Next Question >",
+                                                "value": "5"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
                             
                         },
                         
@@ -96,12 +111,6 @@ export class CommandNavigate {
                             "name": "Identify Challenges",
                             "title": "How about current challenges? We can help there too.",
                             "prompt": "What challenges is your student currently facing?",
-                            "actions": [
-                                {
-                                    "type": "button",
-                                    "label": "Next Question"
-                                }
-                            ],
                             "summary": {
                                 "type": "text",
                                 "pre": "We have over",
@@ -109,28 +118,54 @@ export class CommandNavigate {
                                 "post": "resource links available",
                                 "prompt": "Let's personalize your journey"
                             },
-                            "action_buttons": [
-                                {
-                                   value: "1",
-                                   label: "Financial"
-                                },
-                                {
-                                   value: "2",
-                                   label: "Academic"
-                                },
-                                {
-                                    value: "3",
-                                    label: "Wellness"
-                                },
-                                {
-                                    value: "4",
-                                    label: "Relationships"
-                                },
-                                {
-                                    value: "5",
-                                    label: "Scheduling"
-                                }
-                            ]
+                            "form_data": {
+                                "name": "Milestone Selector",
+                                "description": "This is the form to grab milestone information",
+                                "sections": [
+                                    {
+                                        "name": "Collector",
+                                        "fields": [
+                                            {
+                                                "type": "selector",
+                                                "label": "Financial",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "Academic",
+                                                "value": "2"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "Wellness",
+                                                "value": "3"
+                                            },
+                                            {
+                                                "type": "selector",
+                                                "label": "Relationships",
+                                                "value": "4"
+                                            },
+                                            {
+                                                
+                                                "type": "selector",
+                                                "label": "Scheduling",
+                                                "value": "5"
+                                                
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "Actions",
+                                        "fields": [
+                                            {
+                                                "type": "button",
+                                                "label": "Next Question >",
+                                                "value": "5"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
                         },
                         {
                             "name": "Links Summary",

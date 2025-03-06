@@ -13,7 +13,8 @@ export class PageSerializer extends BaseSerializer {
         this._copyAttributes(page, data);
 
         const actionSerializer = new PageActionSerializer();
-        page.actions = data.actions.map((method: any) => actionSerializer.deserialize(method));
+        if(data.actions)
+            page.actions = data.actions.map((method: any) => actionSerializer.deserialize(method));
 
         const summarySerializer = new PageSummarySerializer();
         page.summary = summarySerializer.deserialize(data.summary);
