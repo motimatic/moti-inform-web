@@ -1,7 +1,7 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
 
 import { QuickLinkSerializer } from "../../../models/serializers/quickLinkSerializer.ts";
-import { QuickLinks } from "../../../models/quickLink.model.ts";
+import { QuickLink } from "../../../models/quickLink.model.ts";
 
 export class CommandQuickLinks {
     RESOURCE_FINDER_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
@@ -13,12 +13,8 @@ export class CommandQuickLinks {
 
     async run() {
 
-        const url = this.getUrl()
-
-        const params: any = {
-
-           
-        }
+        const url = this.getUrl();
+        const params: any = {};
 
         try {
 
@@ -37,7 +33,7 @@ export class CommandQuickLinks {
 
     }
 
-    deserialize(data: any) : QuickLinks[] {
+    deserialize(data: any) : QuickLink[] {
         const serializer = new QuickLinkSerializer();
         return serializer.deserializeList(data);
     }
