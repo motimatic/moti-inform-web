@@ -3,6 +3,7 @@ import { Modal, Button } from "@mantine/core";
 import { CloseButton } from "@mantine/core";
 import { useState } from "react";
 import StudentForm from "./studentForm";
+import { appStore } from "../../../../../../appStore";
 
 interface MatchingResourcesModalProps {
   opened: boolean;
@@ -28,7 +29,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
             >
         {!showForm &&
             <Modal.Header>
-                <Container className="flex justify-between items-center w-full bg-blue-600 py-4" fluid>
+                <Container className="flex justify-between items-center w-full py-4" style={{backgroundColor:appStore.landingPageConfig.brand.primary_color_code}}>
                     <div className="flex justify-start items-center">
                         
                         <CloseButton

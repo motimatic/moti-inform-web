@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+
 import { ResourceSelected } from "../../../../../shared/models/resourceSelected.ts";
 import { resourceFinderStore } from "../../../../../state/resourceFinderStore.ts";
 import LinksSummaryRow from "./components/LinksSummaryRow.tsx";
@@ -22,13 +22,6 @@ const LinksSummaryPage = () => {
                     <LinksSummaryRow key={resource.value} resourceName={resource.label}/>
                 )
             }
-            
-            <Button fullWidth size="lg"
-                    color="green"
-                    onClick={open}
-            >
-              View Matching Resources
-            </Button>
           
         </>
     );

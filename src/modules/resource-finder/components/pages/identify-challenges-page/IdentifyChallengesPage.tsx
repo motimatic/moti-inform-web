@@ -16,7 +16,7 @@ const IdentifyChallengesPage = () => {
                   <Button key={field.value} 
                     onClick={()=>{resourceFinderStore.selectResource(name , field.value, field.label)}} 
                     className='mx-2 my-2 bg-amber-300' 
-                    variant={x.length > 0 && x[0].value==field.value ? "variant": "outline"}>
+                    variant={x.length > 0 && x.find((el)=> el.value == field.value ) ? "variant": "outline" }>
                     {field.label} 
                 </Button> 
                 ))  
