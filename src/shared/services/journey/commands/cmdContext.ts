@@ -33,14 +33,14 @@ export class CommandContext {
 
     deserialize(data: any) : any{
         const serializer = new JourneyContextSerializer();
-        const page = serializer.deserialize(data);
+        const page = serializer.deserialize(data.journey_context);
         return page;
     }
 
     private getTestData(params: any) {
 
         const response = {
-            data: {
+            journey_context: {
                     "current_page": 0,
                     "pages": [
                         {
