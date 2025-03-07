@@ -5,6 +5,7 @@ import { Page } from "../../../../shared/models/page.model.ts";
 import { JourneyService } from "../../../../shared/services/journey/journeyService.ts";
 import { JourneyContext } from "../../../../shared/models/journeyContext.model.ts";
 import { resourceFinderStore } from "../../../../state/resourceFinderStore.ts";
+import LinksSummaryPage from "./links-summary-page/LinksSummaryPage.tsx";
 
 const PageRenderer = () => {
   const snap = useSnapshot(resourceFinderStore);
@@ -16,8 +17,8 @@ const PageRenderer = () => {
     useEffect(()=>{
         const fetchJourneyContext = async() => {
         //first request tofetch journey context to fill resource finder component
+        //TODO REMOVE THIS HARDCODED VALUES
         const journeyContext =  await service.context("123456", "localhost");
-            console.log("journeyContext ", journeyContext.getCurrentPage())
             if(journeyContext) {
                 resourceFinderStore.setContext(journeyContext as JourneyContext);
                 setCurrentPage(journeyContext.getCurrentPage());
@@ -37,7 +38,7 @@ const PageRenderer = () => {
         if(resourceFinderStore.context.pages.length > 0)
         //request on each step selected by user
         {
-        const finderContext = await service.navigate(currentPage.name);
+        const finderContext = await service.navigate(resourceFinderStore.context);
         if (finderContext) {
           resourceFinderStore.setContext(finderContext as JourneyContext);
           setCurrentPage(finderContext.getCurrentPage());
@@ -57,8 +58,13 @@ const PageRenderer = () => {
     console.log("get page");
   }, [snap.buttonClicked]);
 
-  return (
-    <>{CurrentPageComponent ? <CurrentPageComponent /> : <p>Loading...</p>}</>
+    return (
+        <>{CurrentPageComponent ? 
+        <>
+            <CurrentPageComponent />
+            {/* REMOVE THIS ONECE THE API WORKS CORRECTLY */}
+            <LinksSummaryPage/>
+        </> : <p>Loading...</p>}</>
   );
 };
 

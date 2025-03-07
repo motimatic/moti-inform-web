@@ -1,5 +1,6 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
 import {JourneyContextSerializer} from "../../../models/serializers/journeyContextSerializer.ts";
+import { JourneyContext } from "../../../models/journeyContext.model.ts";
 
 
 export class CommandNavigate {
@@ -7,18 +8,15 @@ export class CommandNavigate {
     DEFAULT_LIMIT = import.meta.env.VITE_API_DEFAULT_LIMIT;
 
     getUrl() {
-        return  `${this.RESOURCE_FINDER_SERVICE}/journey/navigate/`;
+        return  `${this.RESOURCE_FINDER_SERVICE}/journeys/navigate/`;
     }
 
-    async run(fromPage: string  | null  = null, action=null, offset=0, limit=this.DEFAULT_LIMIT) {
+    async run(journeyContext: JourneyContext) {
 
-        const url = this.getUrl()
-
+        const url = this.getUrl();
         const body: any = {
-            from_page: fromPage,
-            action: action,
-            offset: offset,
-            limit: limit
+            ...journeyContext,
+            next_page: journeyContext.next_page + 1
         }
 
         try {
@@ -29,7 +27,6 @@ export class CommandNavigate {
                 response = await this.getTestData(body);
             else
                 response = await httpClient.post(url, body);
-
             return this.deserialize(response.data);
 
         } catch (error) {
@@ -41,7 +38,7 @@ export class CommandNavigate {
 
     deserialize(data: any) : any {
         const serializer = new JourneyContextSerializer();
-        const page = serializer.deserialize(data.context);
+        const page = serializer.deserialize(data);
         return page;
     }
 
@@ -201,6 +198,4 @@ export class CommandNavigate {
         return response;
 
     }
-
-
 }

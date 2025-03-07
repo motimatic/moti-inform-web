@@ -21,7 +21,6 @@ export class CommandContext {
                 response = await this.getTestData(params);
             else
                 response = await httpClient.get(url, params);
-
             return this.deserialize(response.data);
 
         } catch (error) {
@@ -33,15 +32,19 @@ export class CommandContext {
 
     deserialize(data: any) : any{
         const serializer = new JourneyContextSerializer();
-        const page = serializer.deserialize(data.journey_context);
+        const page = serializer.deserialize(data);
         return page;
     }
 
     private getTestData(params: any) {
 
         const response = {
-            journey_context: {
+            data: {
+                    "id": 17,
+                    "person_id": 10,
+                    "journey_id": 2,
                     "current_page": 0,
+                    "next_page": 1,
                     "pages": [
                         {
                             "name": "Journey Confirmation",
@@ -97,8 +100,8 @@ export class CommandContext {
                             }
                         }
                     ]
+                }
             }
-        }
 
         if (params.from_page == 'Journey Confirmation'){
             response.data.current_page = 1;
