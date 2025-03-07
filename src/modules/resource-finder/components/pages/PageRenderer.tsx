@@ -5,7 +5,6 @@ import { Page } from "../../../../shared/models/page.model.ts";
 import { JourneyService } from "../../../../shared/services/journey/journeyService.ts";
 import { JourneyContext } from "../../../../shared/models/journeyContext.model.ts";
 import { resourceFinderStore } from "../../../../state/resourceFinderStore.ts";
-import LinksSummaryPage from "./links-summary-page/LinksSummaryPage.tsx";
 
 const PageRenderer = () => {
   const snap = useSnapshot(resourceFinderStore);
@@ -62,8 +61,6 @@ const PageRenderer = () => {
         <>{CurrentPageComponent ? 
         <>
             <CurrentPageComponent />
-            {/* REMOVE THIS ONECE THE API WORKS CORRECTLY */}
-            <LinksSummaryPage/>
         </> : <p>Loading...</p>}</>
   );
 };
