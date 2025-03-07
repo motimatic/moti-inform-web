@@ -4,7 +4,6 @@ import { resourceFinderStore } from '../../../../../state/resourceFinderStore';
 import { Field, PageSection } from '../../../../../shared/models/pageSectionmodel';
 
 const JourneyConfirmationPage = () => {
-
     const snapshot = useSnapshot(resourceFinderStore);
     const { title, prompt, form_data, name } = snapshot.context.getCurrentPage();
     const x = snapshot.resourceSelected.filter((resource)=> resource.journeyName == name)
@@ -16,12 +15,12 @@ const JourneyConfirmationPage = () => {
                 { form_data.sections?.filter((section: PageSection) => section.name.toLocaleLowerCase() == "collector").map((section: PageSection)=>{
                     return(
                         section.fields.map((field: Field)=>
-                          <Button key={field.value} 
-                            onClick={()=>{resourceFinderStore.selectResource(name , field.value, field.label)}} 
-                            className='mx-2 my-2 bg-amber-300' 
-                            variant={x.length > 0 && x[0].value==field.value ? "variant": "outline"}>
-                            {field.label} 
-                        </Button> 
+                            <Button key={field.value} 
+                                onClick={()=>{resourceFinderStore.selectResource(name , field.value, field.label)}} 
+                                className='mx-2 my-2 bg-amber-300' 
+                                variant={x.length > 0 && x.find((el)=> el.value == field.value ) ? "variant": "outline" }>
+                                {field.label} 
+                            </Button> 
                             )
                         )
                     })

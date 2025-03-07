@@ -9,15 +9,13 @@ export const resourceFinderStore = proxy({
     triggerAction: () => {
         resourceFinderStore.buttonClicked = !resourceFinderStore.buttonClicked;
     },
-
     setContext: (newContext: JourneyContext) => {
         resourceFinderStore.context = newContext; // Reassign new context instance
     },
     selectResource: (journeyName: string, value: string, label: string) => {
-        const resourceIndex = resourceFinderStore.resourceSelected.findIndex((el: any) => el.journeyName == journeyName);
-        if(resourceIndex != -1){
-            resourceFinderStore.resourceSelected[resourceIndex].value = value;
-            resourceFinderStore.resourceSelected[resourceIndex].label = label;
+        const resourceIndex = resourceFinderStore.resourceSelected.findIndex((el: any) => (el.journeyName == journeyName && el.value == value ));
+        if(resourceIndex != -1) {
+            resourceFinderStore.resourceSelected.splice(resourceIndex,1);
         }else
             resourceFinderStore.resourceSelected.push({journeyName, value, label});
     }
