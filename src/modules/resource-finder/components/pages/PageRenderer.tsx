@@ -5,9 +5,11 @@ import { Page } from "../../../../shared/models/page.model.ts";
 import { JourneyService } from "../../../../shared/services/journey/journeyService.ts";
 import { JourneyContext } from "../../../../shared/models/journeyContext.model.ts";
 import { resourceFinderStore } from "../../../../state/resourceFinderStore.ts";
+import {appStore} from "../../../../appStore.ts";
 
 const PageRenderer = () => {
   const snap = useSnapshot(resourceFinderStore);
+  const appSnap = useSnapshot(appStore);
 
   const [currentPage, setCurrentPage] = useState(new Page());
   const [CurrentPageComponent, setCurrentPageComponent] = useState<React.FC | null>(null);
@@ -15,9 +17,9 @@ const PageRenderer = () => {
 
     useEffect(()=>{
         const fetchJourneyContext = async() => {
-        //first request tofetch journey context to fill resource finder component
-        //TODO REMOVE THIS HARDCODED VALUES
-        const journeyContext =  await service.context("123456", "localhost");
+
+        // First request to fetch journey context to fill resource finder component
+        const journeyContext =  await service.context(appStore.adId, appStore.pageHostName);
             if(journeyContext) {
                 resourceFinderStore.setContext(journeyContext as JourneyContext);
                 setCurrentPage(journeyContext.getCurrentPage());
