@@ -1,29 +1,36 @@
 
-import { ResourceSelected } from "../../../../../shared/models/resourceSelected.ts";
 import { resourceFinderStore } from "../../../../../state/resourceFinderStore.ts";
 import LinksSummaryRow from "./components/LinksSummaryRow.tsx";
 import {useSnapshot} from "valtio/index";
 import { useDisclosure } from "@mantine/hooks";
 import MatchingResourcesModal from "./components/MatchingResourcesModal.tsx";
+import { Field, PageSection } from "../../../../../shared/models/pageSectionmodel.ts";
+import { Box, LoadingOverlay, Text } from "@mantine/core";
 
 
 const LinksSummaryPage = () => {
 
     const snapshot = useSnapshot(resourceFinderStore);
-    const { title, prompt } = snapshot.context.getCurrentPage();
-    const [opened, { open, close }] = useDisclosure(false);
+    const { title, prompt, form_data } = snapshot.context.getCurrentPage();
+    const [opened, { close }] = useDisclosure(false);
+    const { isLoading } = resourceFinderStore;
+    const fields =  form_data.sections.find((section: PageSection)=> section.name.toLowerCase() == "display");
+    console.log("fields ", fields)
     return (
-        <>
+        <Box pos="relative">
+             <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
             <MatchingResourcesModal opened={opened}close={close}/>
-            <label>{title || "No summary available"}</label>
-            <h4>{prompt || "No summary available"}</h4>
+            <Text size="md">{title || "No summary available"}</Text>
+            <Text size="xl">{prompt || "No summary available"}</Text>
             {
-                resourceFinderStore.resourceSelected.map((resource: ResourceSelected) =>
-                    <LinksSummaryRow key={resource.value} resourceName={resource.label}/>
-                )
+                fields && fields.fields.map((field: Field)=> {
+                    return(
+                        <LinksSummaryRow field={field} />
+                    )
+                })
             }
           
-        </>
+        </Box>
     );
 };
 

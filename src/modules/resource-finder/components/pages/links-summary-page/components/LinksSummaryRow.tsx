@@ -1,14 +1,16 @@
-
+import { Title, Text } from "@mantine/core";
+import { Field } from "../../../../../../shared/models/pageSectionmodel";
 
 interface LinksSummaryRowProps {
-    resourceName: string;
+    field: Field;
 }
-const LinksSummaryRow : React.FC<LinksSummaryRowProps> = ({ resourceName }) => {
+const LinksSummaryRow : React.FC<LinksSummaryRowProps> = ({ field }) => {
 
     return (
         <>  
-            <div style={{padding: '10px', margin: '10px', border: 'solid 1px grey', borderRadius: '4px'}}>
-                {resourceName}
+            <div className="flex items-center" style={{padding: '10px', margin: '10px', border: 'solid 1px grey', borderRadius: '4px'}}>
+               <Title order={5} className="w-2/4 pe-6" >{field.label}</Title>
+               <Text>{field.value} resources found</Text>
             </div>
         </>
     );

@@ -6,6 +6,7 @@ export const resourceFinderStore = proxy({
     context: new JourneyContext(),
     buttonClicked: false,
     resourceSelected: [] as ResourceSelected[],
+    isLoading: false,
     triggerAction: () => {
         resourceFinderStore.buttonClicked = !resourceFinderStore.buttonClicked;
     },
@@ -18,7 +19,10 @@ export const resourceFinderStore = proxy({
             resourceFinderStore.resourceSelected.splice(resourceIndex,1);
         }else
             resourceFinderStore.resourceSelected.push({journeyName, value, label});
+    },
+    setIsLoading: (value : boolean) => {
+        resourceFinderStore.isLoading = value;
     }
-    
+     
 
 });

@@ -13,24 +13,14 @@ const ButtonBar = () => {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-        {/* REMOVE THIS ONCE WE HAVE DATA */}
         <MatchingResourcesModal opened={opened}close={close}/>
-    {/* FLOW FOR TESTING PURPOSES, REMOVE THIS ONCE WE HAVE THE DATA */}
-      {resourceFinderStore.context.current_page == 1 ?
-       
-      <Button fullWidth size="lg" color="green" onClick={open}>
-        View Matching Resources
-      </Button>
-      :
-      <Button
-        fullWidth
-        size="lg"
-        color="#af2e34"
-        rightSection={arrowIcon}
-        onClick={resourceFinderStore.triggerAction}
-      >
-       
-
+        <Button
+            fullWidth
+            size="lg"
+            color={resourceFinderStore.context.current_page == 2 ? "green" :"#af2e34"}
+            rightSection={arrowIcon}
+            onClick={resourceFinderStore.context.current_page == 2 ? open :resourceFinderStore.triggerAction}
+        >
         {currentPage &&
           currentPage.form_data.sections
             ?.find(
@@ -39,9 +29,7 @@ const ButtonBar = () => {
             )
             ?.fields.find((field: Field) => field.type == "button")?.label}
       </Button>
-    }
     </div>
   );
 };
-// #882e34
 export default ButtonBar;

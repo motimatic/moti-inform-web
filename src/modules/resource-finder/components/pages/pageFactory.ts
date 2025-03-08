@@ -7,8 +7,8 @@ export class PageFactory {
 
     private static pageList : Record<string, React.FC> = {
         "Journey Confirmation": JourneyConfirmationPage,
-        "Identify Challenges": IdentifyChallengesPage,
-        "Links Summary": LinksSummaryPage
+        "Challenges Page": IdentifyChallengesPage,
+        "Resource Links": LinksSummaryPage
     }
 
     static create(page: Page): React.FC {
