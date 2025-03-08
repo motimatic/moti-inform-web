@@ -23,7 +23,7 @@ const LinksSummaryPage = () => {
             {
                 fields && fields.fields.map((field: Field)=> {
                     return(
-                        <LinksSummaryRow field={field} />
+                        <LinksSummaryRow key={field.value} field={field} />
                     )
                 })
             }
