@@ -11,10 +11,10 @@ const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
 	const [showMessage, setShowMessage] = useState<boolean>(false);
 	const form = useForm({
     	initialValues: {
-      		firstName: '',
-      		lastName: '',
-      		email: '',
-      		phone: '',
+      		firstName: 'John',
+      		lastName: 'Doe',
+      		email: 'mail@example.com',
+      		phone: '1020304050',
     	},
     	validate: {
       		firstName: (value: any) => (value.length === 0 ? 'First name is required' : null),
@@ -55,14 +55,14 @@ const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
 							placeholder="Enter your first name"
 							{...form.getInputProps('firstName')}
 							required
-							value={"Jesus"}
+							value={"John"}
 							style={{ marginBottom: '10px' }}
 						/>
 					</Grid.Col>
 					<Grid.Col span={{xs:12, md:6}}>
 						<TextInput
 							label="Last Name"
-							value={"Balderrama"}
+							value={"Doe"}
 							placeholder="Enter your last name"
 							{...form.getInputProps('lastName')}
 							required
@@ -75,13 +75,13 @@ const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
 					placeholder="Enter your email"
 					{...form.getInputProps('email')}
 					required
-					value={"jesus.balderrama@motimatic.com"}
+					value={"mail@example.com"}
 					type="email"
 					style={{ marginBottom: '10px' }}
 				/>
 				<TextInput
 					label="Phone"
-					value={"3310267262"}
+					value={"1020304050"}
 					placeholder="Enter your phone number"
 					{...form.getInputProps('phone')}
 					required
