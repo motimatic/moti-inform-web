@@ -1,12 +1,12 @@
 export class ResourceSelected {
 
     journeyName: string;
-    value:  string;
+    value:  number;
     label:  string;
 
     constructor() {
         this.journeyName = "";
-        this.value = "";
+        this.value = 0;
         this.label =   "";
     }
 }

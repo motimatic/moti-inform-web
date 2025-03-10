@@ -13,6 +13,12 @@ export const resourceFinderStore = proxy({
     setContext: (newContext: JourneyContext) => {
         resourceFinderStore.context = newContext; // Reassign new context instance
     },
+    updateCurrentPage:(value: number) => {
+        resourceFinderStore.context.current_page = value;
+    },
+    updateNextPage:(value: number) => {
+        resourceFinderStore.context.next_page = value;
+    },
     selectResource: (journeyName: string, value: string, label: string) => {
       
         

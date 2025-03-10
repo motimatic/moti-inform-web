@@ -18,8 +18,10 @@ const ResourceFinder = () => {
             <Grid.Col span={{sm:12, md:9}} p={20} m={0}>
                 <Title order={3} >Resource Finder</Title>
                 <Grid align="center">
-                    <Grid.Col span={{xs:11}} ><ProgressBar currentProgress={currentProgress}/></Grid.Col>
-                    {/* <Grid.Col span={{xs:1}}><BackButton/></Grid.Col> */}
+                    <Grid.Col span={{base:11}} ><ProgressBar currentProgress={currentProgress}/></Grid.Col>
+                    {  current_page != 0 &&
+                            <Grid.Col span={{base:1}}><BackButton/></Grid.Col>
+                    }
                 </Grid>
                 <PageRenderer/>
                 <ButtonBar/>

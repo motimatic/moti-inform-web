@@ -9,8 +9,9 @@ const JourneyConfirmationPage = () => {
     const { isLoading } = resourceFinderStore;
     const x = snapshot.resourceSelected.filter((resource)=> resource.journeyName == name)
     
-    const journeyActions =  (field: Field) => {
+    const actions =  (field: Field) => {
         resourceFinderStore.selectResource(name , field.value, field.label)
+        resourceFinderStore.updateNextPage(resourceFinderStore.context.next_page + 1);
         resourceFinderStore.triggerAction();
     }
     return (
@@ -24,7 +25,7 @@ const JourneyConfirmationPage = () => {
                     return(
                         section.fields.map((field: Field)=>
                             <Button key={field.value} 
-                                onClick={()=>{journeyActions(field)}} 
+                                onClick={()=>{actions(field)}} 
                                 className='mx-2 my-2 bg-amber-300' 
                                 variant={x.length > 0 && x.find((el)=> el.value == field.value ) ? "variant": "outline" }>
                                 {field.label} 

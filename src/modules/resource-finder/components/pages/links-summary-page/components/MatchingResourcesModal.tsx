@@ -35,8 +35,9 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                         <CloseButton
                             size="xl"
                             variant="light"
-                            style={{ color: "#FFF"}}
+                            style={{ color: "#FFF", outline: "none"}}
                             onClick={close}
+                            
                         />
                         <Title order={2} style={{ color: "#FFF" }}>
                             View Matching Resources

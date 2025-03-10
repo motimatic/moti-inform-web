@@ -15,8 +15,7 @@ export class CommandNavigate {
 
         const url = this.getUrl();
         const body: any = {
-            ...journeyContext,
-            next_page: journeyContext.next_page + 1
+            ...journeyContext
         }
 
         try {

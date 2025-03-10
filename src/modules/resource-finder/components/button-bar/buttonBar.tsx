@@ -11,6 +11,15 @@ const ButtonBar = () => {
   useSnapshot(resourceFinderStore);
   const currentPage = resourceFinderStore.context.getCurrentPage();
   const [opened, { open, close }] = useDisclosure(false);
+  const actions = () => {
+   
+    if(resourceFinderStore.context.current_page == 2){
+        open();
+    }else {
+        resourceFinderStore.updateNextPage(resourceFinderStore.context.next_page + 1);
+        resourceFinderStore.triggerAction();    
+    }
+  }
   return (
     <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
         <MatchingResourcesModal opened={opened}close={close}/>
@@ -19,7 +28,7 @@ const ButtonBar = () => {
             size="lg"
             color={resourceFinderStore.context.current_page == 2 ? "green" :"#af2e34"}
             rightSection={arrowIcon}
-            onClick={resourceFinderStore.context.current_page == 2 ? open :resourceFinderStore.triggerAction}
+            onClick={actions}
         >
         {currentPage &&
           currentPage.form_data.sections
