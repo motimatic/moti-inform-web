@@ -12,11 +12,11 @@ export class PageSection {
 export class Field {
     type: string;
     label: string;
-    value: string;
+    value: number;
     constructor() {
         this.type = "";
         this.label = "";
-        this.value = "";
+        this.value = 0;
     }
 
 }

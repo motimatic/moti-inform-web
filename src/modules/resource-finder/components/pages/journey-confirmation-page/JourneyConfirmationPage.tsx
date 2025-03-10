@@ -1,4 +1,4 @@
-import { Box, Button, LoadingOverlay } from '@mantine/core';
+import { Box, Button, LoadingOverlay, Text } from '@mantine/core';
 import {useSnapshot} from "valtio/index";
 import { resourceFinderStore } from '../../../../../state/resourceFinderStore';
 import { Field, PageSection } from '../../../../../shared/models/pageSectionmodel';
@@ -16,8 +16,8 @@ const JourneyConfirmationPage = () => {
     return (
         <Box pos="relative">
         	<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
-            <label>{title || "No summary available"}</label>
-            <h4>{prompt || "No summary available"}</h4>
+            <Text size="md" mt={0} pb={20}>{title || "No summary available"}</Text>
+            <h2  className="font-normal text-2xl">{prompt || "No summary available"}</h2>
             
             <div className='flex flex-wrap'>
                 { form_data.sections?.filter((section: PageSection) => section.name.toLocaleLowerCase() == "collector").map((section: PageSection)=>{
