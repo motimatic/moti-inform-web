@@ -8,8 +8,10 @@ import { resourceFinderStore } from "../../state/resourceFinderStore.ts";
 
 const ResourceFinder = () => {
     const snapshot = useSnapshot(resourceFinderStore);
-    const { current_page, pages} = snapshot.context;
-    const currentProgress = ((current_page + 1) / pages.length )* 100;
+    const { current_page } = snapshot.context;
+    const totalPages = 3;
+    const currentProgress = ((current_page + 1) / totalPages)* 100;
+
     return (
         <Grid columns={12} gutter={0} style={{ margin: 0 }}>
             <Grid.Col span={{sm:12, md:9}} p={20} m={0}>
