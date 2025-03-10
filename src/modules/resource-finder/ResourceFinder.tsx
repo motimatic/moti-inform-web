@@ -1,10 +1,11 @@
 import PageRenderer from "./components/pages/PageRenderer.tsx";
 import ProgressBar from "./components/progress-bar/progressBar.tsx";
 import ButtonBar from "./components/button-bar/buttonBar.tsx";
-import {Grid, Title} from "@mantine/core";
+import {Container, Grid, Title} from "@mantine/core";
 import InfoPanel from "./components/info-panel/infoPanel.tsx";
 import { useSnapshot } from "valtio";
 import { resourceFinderStore } from "../../state/resourceFinderStore.ts";
+import BackButton from "./components/back-button/backButton.tsx";
 
 const ResourceFinder = () => {
     const snapshot = useSnapshot(resourceFinderStore);
@@ -16,7 +17,10 @@ const ResourceFinder = () => {
         <Grid columns={12} gutter={0} style={{ margin: 0 }}>
             <Grid.Col span={{sm:12, md:9}} p={20} m={0}>
                 <Title order={3} >Resource Finder</Title>
-                <ProgressBar currentProgress={currentProgress}/>
+                <Grid align="center">
+                    <Grid.Col span={{xs:11}} ><ProgressBar currentProgress={currentProgress}/></Grid.Col>
+                    {/* <Grid.Col span={{xs:1}}><BackButton/></Grid.Col> */}
+                </Grid>
                 <PageRenderer/>
                 <ButtonBar/>
             </Grid.Col>

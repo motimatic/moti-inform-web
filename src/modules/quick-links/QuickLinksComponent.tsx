@@ -12,39 +12,35 @@ const QuickLinksComponent = () => {
 
 
     return (
-        <Container fluid className="mt-4 flex flex-col items-start">
+        <Container fluid className="w-full mt-4 flex flex-col items-start">
             <Title order={4}>Quick Links</Title>
-            <Grid columns={12} gutter={0} className="py-4">
-                {
-                    appStore.landingPageConfig.quickLinks.map((link: QuickLink)=>{
-                        return (
-                            <Grid.Col span={{ base: 12 }} key={link.id}>
-                                <Container fluid className=" pb-0 text-left mb-3 border border-gray-300 rounded-xs">
-                                    <Grid className="py-3">
-                                        <Grid.Col  span={{sm: 12, md: 9, lg: 9}}>
-                                            <Container px={0}> 
-                                                <Title order={6}>{link.title}</Title>
-                                            </Container>
-                                            <Container px={0} className="px-0 mx-0">
-                                                <Text size={"sm"}>{link.subtitle}</Text>
-                                            </Container>
-                                        </Grid.Col>
-                                        <Grid.Col span={{sm: 12, md: 3, lg: 3}}>
+            <Container fluid className="w-full">
+                <Grid columns={12} gutter={0} className="py-4">
+                    {
+                        appStore.landingPageConfig.quickLinks.map((link: QuickLink)=>{
+                            return (
+                                    <Container key={link.id} fluid className="flex items-center flex-col md:flex-row justify-start w-full py-5 text-left mb-3 border border-gray-300 rounded-xs">
+                                     
+                                        <Container className="w-full" px={0} pb={5}> 
+                                            <Title order={6} pb={8}>{link.title}</Title>
+                                            <Text size={"sm"}>{link.subtitle}</Text>
+                                        </Container>
+                                        <Container className="mt-5 md:mt-0">
                                             <Button
                                                 color="yellow"
                                                 size="sm"
                                                 onClick={() => handleOpenNewTab(link.link)}
-                                            >
+                                                >
                                                 {link.label}
                                             </Button>
-                                        </Grid.Col>
-                                    </Grid>
-                                </Container>
-                            </Grid.Col>
-                        )
-                    })
-                }
-            </Grid>
+                                        </Container>
+                             
+                                    </Container>
+                            )
+                        })
+                    }
+                </Grid>
+            </Container>
         </Container>
     );
 };

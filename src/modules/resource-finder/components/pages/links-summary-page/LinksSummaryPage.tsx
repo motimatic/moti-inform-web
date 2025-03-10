@@ -16,7 +16,7 @@ const LinksSummaryPage = () => {
     const fields =  form_data.sections.find((section: PageSection)=> section.name.toLowerCase() == "display");
     return (
         <Box pos="relative">
-             <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+            <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
             <MatchingResourcesModal opened={opened}close={close}/>
             <Text size="md">{title || "No summary available"}</Text>
             <Text size="xl">{prompt || "No summary available"}</Text>

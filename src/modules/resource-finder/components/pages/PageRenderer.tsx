@@ -42,6 +42,7 @@ const PageRenderer = () => {
     },[])
 
     useEffect(() => {
+        console.log("BUTTON CLICKED")
         const fetchPage = async () => {
         try {
             setIsLoading(true);

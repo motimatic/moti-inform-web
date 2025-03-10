@@ -12,9 +12,9 @@ const MetricPanel = () => {
         <div className="py-10 px-6">
             <Title order={3}>{summary?.pre || ""}</Title>
             { summary.value != null &&
-                <Title order={2}  className="border-b-3 w-20 border-yellow-500 rounded-x">{summary?.value}</Title>
+                <Title order={2}  className="border-b-3 w-fit border-yellow-500 rounded-x">{summary?.value}</Title>
             }
-            <Text size="lg" mt={10}>{summary?.post != "" && `${summary?.post},`} {summary?.prompt || ""}</Text>
+            <Text size="lg" mt={10}>{summary?.post != "" && `${summary?.post}`} {summary?.prompt || ""}</Text>
         </div>
     );
 };
