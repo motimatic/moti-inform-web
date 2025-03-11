@@ -51,9 +51,8 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
             >
         {!showForm &&
             <Modal.Header>
-                <Container className="flex justify-between items-center w-full py-4" style={{backgroundColor:appStore.landingPageConfig.brand.primary_color_code}}>
+                <Container className="flex justify-between items-center flex-col sm:flex-row w-full py-4" style={{backgroundColor:appStore.landingPageConfig.brand.primary_color_code}}>
                     <div className="flex justify-start items-center">
-                        
                         <CloseButton
                             size="xl"
                             variant="light"
@@ -61,11 +60,11 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                             onClick={close}
                             
                         />
-                        <Title order={2} style={{ color: "#FFF" }}>
+                        <h2 className="text-white text-md sm:text-xl md:text-3xl">
                             View Matching Resources
-                        </Title>
+                        </h2>
                     </div>
-                    <Button color="green" size="md" onClick={()=>{setShowForm(true)}}>
+                    <Button color="green" size="md"  onClick={()=>{setShowForm(true)}}>
                         Send to Me
                     </Button>
                 </Container>
@@ -78,7 +77,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                     <StudentForm setShowForm={setShowForm} />
                 </div>
             :
-            <Container className="mt-10">
+            <Container className="mt-5">
                 { resources.length > 0 &&
                 <Tabs defaultValue={resources.filter((el:JourneyResource)=>el.resources.length > 0)[0].name.toLowerCase()} >
                     <Tabs.List>

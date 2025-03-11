@@ -22,7 +22,7 @@ const ResourceFinder = () => {
                     <Grid.Col span={{base: 12}} ><ProgressBar currentProgress={currentProgress}/></Grid.Col>
                     <Box pos={"relative"}>
                         {  current_page != 0 &&
-                                <Box pos={"absolute"} right={0} top={-10}>
+                                <Box pos={"absolute"} right={0} top={-26}>
                                     <Grid.Col span={{base:1}}><BackButton/></Grid.Col>
                                 </Box>
                         }
