@@ -1,8 +1,10 @@
 
 import { JourneyContext } from "../../models/journeyContext.model.ts";
+import { Student } from "../../models/student.model.ts";
 import { CommandContext } from "./commands/cmdContext.ts";
 import {CommandNavigate} from "./commands/cmdNavigate.ts";
 import { CommandResources } from "./commands/cmdResources.ts";
+import { CommandSendResources } from "./commands/cmdSendResources.ts";
 
 export class JourneyService {
 
@@ -24,5 +26,12 @@ export class JourneyService {
         const results = cmd.run(journeyId, journeyStepId);
         return results
     }
+
+    sendResources(student: Student) {
+        const cmd = new CommandSendResources();
+        const results = cmd.run(student);
+        return results
+    }
+
 
 }
