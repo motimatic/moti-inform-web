@@ -1,11 +1,15 @@
-import { Alert, Box, Container, Grid, LoadingOverlay, Text, TextInput} from "@mantine/core";
+import { Alert, Box, Container, Grid, Input, LoadingOverlay, Text, TextInput} from "@mantine/core";
 import { Button } from "@mantine/core";
 import { useForm } from '@mantine/form';
 import { useState } from "react";
-
+import { InputBase } from '@mantine/core';
+import { IMaskInput } from 'react-imask';
 interface StudentFormProps {
 	setShowForm: any
 }
+
+
+const phoneRegex = /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/;
 const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
 	const [isLoading, setIsloading] = useState<boolean>(false);
 	const [showMessage, setShowMessage] = useState<boolean>(false);
@@ -14,13 +18,19 @@ const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
       		firstName: 'John',
       		lastName: 'Doe',
       		email: 'mail@example.com',
-      		phone: '1020304050',
+      		phone: '',
     	},
     	validate: {
       		firstName: (value: any) => (value.length === 0 ? 'First name is required' : null),
       		lastName: (value: any) => (value.length === 0 ? 'Last name is required' : null),
       		email: (value: any) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email address'),
-      		phone: (value: any) => (value.length === 0 ? 'Phone number is required' : null),
+      		phone: (value: any) => {
+				if (value.length === 0) return 'Phone number is required';
+				if (!phoneRegex.test(value)) {
+					return 'Invalid phone number format';
+				}
+				return null;
+			},
     	},
   });
 
@@ -78,16 +88,33 @@ const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
 					value={"mail@example.com"}
 					type="email"
 					style={{ marginBottom: '10px' }}
+					
 				/>
-				<TextInput
-					label="Phone"
-					value={"1020304050"}
-					placeholder="Enter your phone number"
-					{...form.getInputProps('phone')}
-					required
-					style={{ marginBottom: '20px' }}
-				/>
-				<Container className="flex justify-end">
+
+
+				
+				<Box pos={"relative"}>
+				<Input.Label required>Phone</Input.Label>
+				<Input
+					
+						error="both below the input"
+						component={IMaskInput}
+						
+						mask="(000) 000-00-00"
+						{...form.getInputProps('phone')}
+						required
+						style={{ marginBottom: '10px' }}
+						/>
+			
+						<Box pos={"absolute"} top={60}>
+							
+						{<span className="text-red-500 text-xs">{form.getInputProps('phone').error}</span>}
+						</Box>
+						
+				</Box>
+						
+	
+				<Container className="flex justify-end mt-15">
 					<Button variant="outline" onClick={()=>setShowForm(false)} className="me-3">Go back</Button>
 					<Button type="submit">Send</Button>
 				</Container>
