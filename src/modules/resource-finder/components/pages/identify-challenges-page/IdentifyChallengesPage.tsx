@@ -23,7 +23,7 @@ const IdentifyChallengesPage = () => {
             { form_data.sections[0].fields.map(((field: Field)=>
                   <Button key={field.value} 
                     onClick={()=>{actions(field)}} 
-                    className='mx-2 my-2 bg-amber-300' 
+                    className='me-2 my-2 bg-amber-300' 
                     variant={x.length > 0 && x.find((el)=> el.value == field.value ) ? "variant": "outline" }>
                     {field.label} 
                 </Button> 
