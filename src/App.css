@@ -4,3 +4,24 @@
 
 }
 
+/*custom CSS for mantine tabs*/
+.mantine-Tabs-list button{
+  color:gray !important;
+  outline: none;
+ 
+}
+
+.mantine-Tabs-list button[data-active="true"]{
+  color:#30A4FF !important;
+  border-color: #30A4FF !important;
+}
+
+.mantine-Tabs-tabLabel p{
+  font-weight: bold !important;
+
+}
+
+.mantine-Tabs-list button span{
+  margin-left: 5px !important;
+
+}

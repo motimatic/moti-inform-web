@@ -86,7 +86,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                             if(el.resources.length == 0) return null;
                             return(
                                 <Tabs.Tab
-                                color="blue" rightSection={<Text size="sm" className="px-0 mx-0">({el.resources.length})</Text>} key={el.id} value={el.name.toLowerCase()} style={{ fontSize: "16px", fontWeight: "bold" }}>
+                                color="blue" rightSection={<Text size="sm" fw={"bold"} className="px-0 mx-0">({el.resources.length})</Text>} key={el.id} value={el.name.toLowerCase()} style={{ fontSize: "16px", fontWeight: "bold" }}>
                                     <Text size="sm">{el.name}</Text>
                             </Tabs.Tab>
                             )
