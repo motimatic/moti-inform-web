@@ -101,7 +101,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                                         <Tabs.Panel value={el.name.toLocaleLowerCase()} key={resource.id}>
                                             <Container className=" pb-0 text-left mt-7 mb-3 border border-gray-300 rounded-xs">
                                                 <Grid className="py-3" align="center">
-                                                    <Grid.Col  span={{ sm: 12, md: 8 }}>
+                                                    <Grid.Col  span={{ xs:12,  sm: 8 }}>
                                                         <Container px={0} >
                                                             <Title  order={6}>{resource.name}</Title>
                                                         </Container>
@@ -112,7 +112,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                                                             </Text>
                                                         </Container> */}
                                                     </Grid.Col>
-                                                    <Grid.Col className="flex justify-end" span={{ sm: 12, md: 4 }}>
+                                                    <Grid.Col className="flex justify-end" span={{ xs:12, sm: 4 }}>
                                                         <Button color="yellow" size="sm" onClick={() => {redirect(resource.url)}}>
                                                             View
                                                         </Button> 
