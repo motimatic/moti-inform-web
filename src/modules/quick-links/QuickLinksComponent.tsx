@@ -14,18 +14,18 @@ const QuickLinksComponent = () => {
     return (
         <Container fluid className="w-full mt-4 flex flex-col items-start">
             <Title order={4}>Quick Links</Title>
-            <Container fluid className="w-full">
+            <Container fluid className="w-full ">
                 <Grid columns={12} gutter={0} className="py-4">
                     {
                         appStore.landingPageConfig.quickLinks.map((link: QuickLink)=>{
                             return (
-                                    <Container key={link.id} fluid className="flex items-center flex-col md:flex-row justify-start w-full py-5 text-left mb-3 border border-gray-300 rounded-xs">
+                                    <Container key={link.id} fluid className="flex items-center flex-col md:flex-row justify-between w-full py-5 text-left mb-3 border border-gray-300 rounded-xs">
                                      
-                                        <Container className="w-full" px={0} pb={5}> 
+                                        <div className="pb-5"> 
                                             <Title order={6} pb={8}>{link.title}</Title>
                                             <Text size={"sm"}>{link.subtitle}</Text>
-                                        </Container>
-                                        <Container className="mt-5 md:mt-0">
+                                        </div>
+                                        <div className="mt-5 md:mt-0">
                                             <Button
                                                 color="yellow"
                                                 size="sm"
@@ -33,7 +33,7 @@ const QuickLinksComponent = () => {
                                                 >
                                                 {link.label}
                                             </Button>
-                                        </Container>
+                                        </div>
                              
                                     </Container>
                             )
