@@ -1,4 +1,4 @@
-import { Container, Grid, Tabs, Title, Text, NavLink } from "@mantine/core";
+import { Container, Grid, Tabs, Title, Text, Loader } from "@mantine/core";
 import { Modal, Button } from "@mantine/core";
 import { CloseButton } from "@mantine/core";
 import { useEffect, useState } from "react";
@@ -15,7 +15,6 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
 
     const [showForm, setShowForm] = useState<boolean>(false);
     const { resources } = resourceFinderStore;
-
     const redirect = (url: string) => {
         window.open(url, '_blank');
     }
@@ -48,7 +47,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
             opened={opened}
             onClose={close}
             withCloseButton={false}
-            >
+        >
         {!showForm &&
             <Modal.Header>
                 <Container className="flex justify-between items-center flex-col sm:flex-row w-full py-4" style={{backgroundColor:appStore.landingPageConfig.brand.primary_color_code}}>
@@ -58,7 +57,6 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                             variant="light"
                             style={{ color: "#FFF", outline: "none"}}
                             onClick={close}
-                            
                         />
                         <h2 className="text-white text-md sm:text-xl md:text-3xl">
                             View Matching Resources
@@ -78,6 +76,11 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                 </div>
             :
             <Container className="mt-5">
+                {resources.length == 0 &&
+                    <Container className="flex justify-center items-center h-100">
+                        <Loader color={appStore.landingPageConfig.brand.primary_color_code}  />
+                    </Container>
+                }
                 { resources.length > 0 &&
                 <Tabs defaultValue={resources.filter((el:JourneyResource)=>el.resources.length > 0)[0].name.toLowerCase()} >
                     <Tabs.List>
@@ -90,8 +93,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                             </Tabs.Tab>
                             )
                         })
-                        } 
-                       
+                        }
                     </Tabs.List>
                     { resources.map((el: JourneyResource)=>{
                         return (
@@ -122,9 +124,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                                         </Tabs.Panel>
                                     )
                                 })
-                        )
-                    })
-                        
+                            )})
                     }
                 </Tabs>
             }
