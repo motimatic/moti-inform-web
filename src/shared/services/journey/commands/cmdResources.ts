@@ -1,5 +1,4 @@
 import httpClient from "../../../utils/http-clients/djangoHttpClient.js";
-import {JourneyContextSerializer} from "../../../models/serializers/journeyContextSerializer.ts";
 import { JourneyResourceSerializer } from "../../../models/serializers/journeyResourceSerializer.ts";
 export class CommandResources {
     RESOURCE_FINDER_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;

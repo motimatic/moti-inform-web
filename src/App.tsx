@@ -27,7 +27,7 @@ function App() {
         const fetchInfo = async () => {
             try {
                 const page_url = window.location.hostname;
-                const adId = searchParams.get("adId");
+                const adId = searchParams.get("adId") || "";
                 appStore.setPageHostName(page_url);
                 appStore.setAdId(adId);
 

@@ -11,9 +11,10 @@ const Footer = () => {
             <Title order={6}>{landingPageConfig.brand.name}</Title>
     
                 <a 
-                    className='text-center text-white'
+                    className='text-cente'
                     href={landingPageConfig.brand.company_site_url}
                     target='_blank'
+                    style={{color:"#FFF"}}
                 >
                     {landingPageConfig.brand.company_site_url.replace(/^https?:\/\//, '')}
                 </a>

@@ -1,7 +1,7 @@
 import PageRenderer from "./components/pages/PageRenderer.tsx";
 import ProgressBar from "./components/progress-bar/progressBar.tsx";
 import ButtonBar from "./components/button-bar/buttonBar.tsx";
-import {Box, Container, Grid, Title} from "@mantine/core";
+import {Box, Grid, Title} from "@mantine/core";
 import InfoPanel from "./components/info-panel/infoPanel.tsx";
 import { useSnapshot } from "valtio";
 import { resourceFinderStore } from "../../state/resourceFinderStore.ts";
