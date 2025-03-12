@@ -20,10 +20,10 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
     }
 
     const selected_journey_id = async() => {
-        const { journey_id, selected_journey_id} = resourceFinderStore.context;
-        if(journey_id != 0 && selected_journey_id != 0) {
+        const { person_id, selected_journey_id} = resourceFinderStore.context;
+        if( person_id != 0 && selected_journey_id != 0) {
             const service = new JourneyService();
-            const response = await service.resources(journey_id,selected_journey_id);
+            const response = await service.resources(person_id,selected_journey_id);
             resourceFinderStore.setResource(response);
         }
 

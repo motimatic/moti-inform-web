@@ -21,9 +21,9 @@ export class JourneyService {
         return results
     }
 
-    resources(journeyId: number, journeyStepId: number) {
+    resources(personId: number, journeyStepId: number) {
         const cmd = new CommandResources();
-        const results = cmd.run(journeyId, journeyStepId);
+        const results = cmd.run(personId, journeyStepId);
         return results
     }
 

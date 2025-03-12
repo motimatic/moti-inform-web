@@ -4,13 +4,13 @@ export class CommandResources {
     RESOURCE_FINDER_SERVICE = import.meta.env.VITE_API_PLATFORM_SERVICE_URL;
     DEFAULT_LIMIT = import.meta.env.VITE_API_DEFAULT_LIMIT;
 
-    getUrl(journeyId: number, journeyStepId:number) {
-        return  `${this.RESOURCE_FINDER_SERVICE}/journeys/resources/?journey_id=${journeyId}&journey_step_id=${journeyStepId}`;
+    getUrl(personId: number, journeyStepId:number) {
+        return  `${this.RESOURCE_FINDER_SERVICE}/journeys/resources/?person_id=${personId}&journey_step_id=${journeyStepId}`;
     }
 
-    async run(journeyId: number, journeyStepId:number) {
+    async run(personId: number, journeyStepId:number) {
 
-        const url = this.getUrl(journeyId, journeyStepId);
+        const url = this.getUrl(personId, journeyStepId);
        
         try {
             let response: any = {}
