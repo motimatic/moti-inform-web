@@ -26,17 +26,18 @@ export const resourceFinderStore = proxy({
     },
     selectResource: (journeyName: string, value: number, label: string) => {
       
-        
+      
         const exists = pagesOneOption.includes(journeyName.toLocaleLowerCase());
         if(exists) {
-            const resourceIndex = resourceFinderStore.resourceSelected.findIndex((el: any) => (el.journeyName == journeyName))
+            const resourceIndex = resourceFinderStore.resourceSelected.findIndex((el: ResourceSelected) => (el.journeyName == journeyName))
             if(resourceIndex != -1) {
                 resourceFinderStore.resourceSelected[resourceIndex].value = value;
+                resourceFinderStore.resourceSelected[resourceIndex].label = label;
             } else {
                 resourceFinderStore.resourceSelected.push({journeyName, value, label});
             }
         } else {
-            const resourceIndex = resourceFinderStore.resourceSelected.findIndex((el: any) => (el.journeyName == journeyName && el.value == value ));
+            const resourceIndex = resourceFinderStore.resourceSelected.findIndex((el:ResourceSelected) => (el.journeyName == journeyName && el.value == value ));
             if(resourceIndex != -1) {
                 resourceFinderStore.resourceSelected.splice(resourceIndex,1);
             } else {

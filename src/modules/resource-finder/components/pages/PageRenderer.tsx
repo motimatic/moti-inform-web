@@ -6,6 +6,9 @@ import { JourneyContext } from "../../../../shared/models/journeyContext.model.t
 import { resourceFinderStore } from "../../../../state/resourceFinderStore.ts";
 import {appStore} from "../../../../appStore.ts";
 import { LoadingOverlay } from "@mantine/core";
+import { Page } from "../../../../shared/models/page.model.ts";
+import { Field, PageSection } from "../../../../shared/models/pageSectionmodel.ts";
+import { ResourceSelected } from "../../../../shared/models/resourceSelected.ts";
 
 
 const PageRenderer = () => {
@@ -34,13 +37,34 @@ const PageRenderer = () => {
         }
     }
 
+    function filterData(data: any, selected: any) {
+        const filteredPages = data.pages.map((page:Page) => {
+          const filteredSections = page.form_data.sections.map(section => {
+            if (section.name === "Collector") {
+              const filteredFields = section.fields.filter((field:Field) =>
+                selected.some(
+                  (s:ResourceSelected) =>
+                    s.journeyName === page.name &&
+                    s.label === field.label
+                )
+              );
+              return { ...section, fields: filteredFields };
+            }
+            return section;
+          });
+          return { ...page, form_data: { ...page.form_data, sections: filteredSections } };
+        });
+        return { ...data, pages: filteredPages };
+      }
+
     const fetchPage = async() => {
         try {
             setIsLoading(true);
-            if(resourceFinderStore.context.pages.length > 0 )
+            if(resourceFinderStore.context.pages.length > 0)
             //request on each step selected by user
             {
-                const finderContext = await service.navigate(resourceFinderStore.context);
+                const contextFiltered : JourneyContext = filterData(resourceFinderStore.context, resourceFinderStore.resourceSelected);
+                const finderContext = await service.navigate(contextFiltered);
                 if (finderContext) {
                     resourceFinderStore.setContext(finderContext as JourneyContext);
                     const PageComponent = PageFactory.create(finderContext.getCurrentPage());
@@ -60,7 +84,7 @@ const PageRenderer = () => {
         } else{
             fetchJourneyContext().then;
         }
-        
+
   }, [snap.buttonClicked]);
 
     return (
