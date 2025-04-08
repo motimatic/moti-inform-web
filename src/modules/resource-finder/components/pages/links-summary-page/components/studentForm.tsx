@@ -1,4 +1,4 @@
-import { Alert, Box, Container, Grid, Input, LoadingOverlay, Text, TextInput} from "@mantine/core";
+import { Alert, Box, Container, Grid, Input, LoadingOverlay, Text, TextInput, Title} from "@mantine/core";
 import { Button } from "@mantine/core";
 import { useForm } from '@mantine/form';
 import { useState } from "react";
@@ -6,12 +6,13 @@ import { IMaskInput } from 'react-imask';
 import { JourneyService } from "../../../../../../shared/services/journey/journeyService";
 import { Student } from "../../../../../../shared/models/student.model";
 import { resourceFinderStore } from "../../../../../../state/resourceFinderStore";
-interface StudentFormProps {
-	setShowForm: any
-}
+import { IconArrowLeft, IconChevronDownLeft, IconChevronLeft } from "@tabler/icons-react";
+import { appStore } from "../../../../../../appStore";
+import { useSnapshot } from "valtio";
 
 const phoneRegex = /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/;
-const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
+const StudentForm = () => {
+	useSnapshot(appStore);
 	const [isLoading, setIsloading] = useState<boolean>(false);
 	const [showMessage, setShowMessage] = useState<boolean>(false);
 	const form = useForm({
@@ -57,46 +58,47 @@ const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
 	};
 
 	return (
-		<Box pos="relative">
+		<div className={`student-form-container ${appStore.showStudentForm ? "show-form" : ""}`}>
 			<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
-			{showMessage && <Alert title="Form submitted successfully" className="mb-5" withCloseButton onClick={()=>{setShowForm(false)}} closeButtonLabel="Dismiss" /> }
+			{showMessage && <Alert title="Form submitted successfully" className="mb-5" withCloseButton onClick={()=>{appStore.setShowStudentForm(false)}} closeButtonLabel="Dismiss" /> }
+			<Title className="text-center roobert-medium pb-8" order={1}>Get Your Resources <br/> Sent to Your Inbox</Title>
+			<div className="inner-form">
 			<form onSubmit={form.onSubmit(handleSubmit)}>
-				<Text size="lg">Please fill out the form below to receive your matching results in your email.</Text>
+				
 				<Grid className="mt-5">
-					<Grid.Col span={{xs:12, md:6}} >
+					<Grid.Col span={{xs:12}} >
 						<TextInput
-							label="First Name"
-							placeholder="Enter your first name"
+							label=""
+							placeholder="First Name*"
 							{...form.getInputProps('firstName')}
 							required
-							style={{ marginBottom: '10px' }}
+						
 						/>
 					</Grid.Col>
-					<Grid.Col span={{xs:12, md:6}}>
+					<Grid.Col span={{xs:12}}>
 						<TextInput
-							label="Last Name"
-							placeholder="Enter your last name"
+							label=""
+							placeholder="Last Name*"
 							{...form.getInputProps('lastName')}
 							required
-							style={{ marginBottom: '10px' }}
+							style={{ marginBottom: '12px' }}
 						/>
 					</Grid.Col>
 				</Grid>
 				<TextInput
-					label="Email"
-					placeholder="Enter your email"
+					label=""
+					placeholder="Email*"
 					{...form.getInputProps('email')}
 					required
 					type="email"
-					style={{ marginBottom: '10px' }}
+					style={{ marginBottom: '12px' }}
 				/>
 				<Box pos={"relative"}>
-					<Input.Label required>Phone</Input.Label>
 					<Input
 						error="both below the input"
 						component={IMaskInput}
 						mask="(000) 000-00-00"
-						placeholder="Enter your phone"
+						placeholder="Phone*"
 						{...form.getInputProps('phone')}
 						required
 						style={{ marginBottom: '10px' }}
@@ -105,13 +107,16 @@ const StudentForm: React.FC<StudentFormProps> = ({setShowForm}) => {
 						{<span className="text-red-500 text-xs">{form.getInputProps('phone').error}</span>}
 					</Box>
 				</Box>
-
-				<Container className="flex justify-end mt-15">
-					<Button variant="outline" onClick={()=>setShowForm(false)} className="me-3">Go back</Button>
-					<Button type="submit">Send</Button>
-				</Container>
 			</form>
-		</Box>
+			<Container className="flex justify-end mt-5">
+					<button type="submit" className="custom-dark-button">SUBMIT</button>
+			</Container>
+			<button className="custom-outline-button back-button no-border text-gray-400" style={{border: "none"}} onClick={()=>{appStore.setShowStudentForm(false)}}>
+				<IconChevronLeft size={25} />
+					BACK
+				</button>
+			</div>
+		</div>
   	);
 };
 

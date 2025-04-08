@@ -10,12 +10,23 @@ const RenderImage :  React.FC<RenderImageProps> = ({ url }) => {
     useSnapshot(appStore);
 
     return (
-            <Image
+            // <Image
+            //     style={{
+            //         maxHeight: "600px"
+            //     }}
+            //     src={url}
+            // />
+            <div
                 style={{
-                    maxHeight: "600px"
+                    backgroundImage: `url(${url})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center center",
+                    backgroundRepeat: "no-repeat",
+                    height: "100vh"
                 }}
-                src={url}
             />
+
+            
     );
 };
 

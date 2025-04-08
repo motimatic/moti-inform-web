@@ -1,15 +1,14 @@
-import { Button } from "@mantine/core";
-import { IconArrowRight } from "@tabler/icons-react";
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { resourceFinderStore } from "../../../../state/resourceFinderStore";
 import { useSnapshot } from "valtio";
-import { Field, PageSection } from "../../../../shared/models/pageSectionmodel";
 import { useDisclosure } from "@mantine/hooks";
 import MatchingResourcesModal from "../pages/links-summary-page/components/MatchingResourcesModal";
+import StudentForm from "../pages/links-summary-page/components/studentForm";
+import { useState } from "react";
+import BackButton from "../back-button/backButton";
 
 const ButtonBar = () => {
-  const arrowIcon = <IconArrowRight size={14} />;
   useSnapshot(resourceFinderStore);
-  const currentPage = resourceFinderStore.context.getCurrentPage();
   const [opened, { open, close }] = useDisclosure(false);
   const actions = () => {
    
@@ -21,23 +20,21 @@ const ButtonBar = () => {
     }
   }
   return (
-    <div style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-        <MatchingResourcesModal opened={opened}close={close}/>
-        <Button
-            fullWidth
-            size="lg"
-            color={resourceFinderStore.context.current_page == 2 ? "green" :"#af2e34"}
-            rightSection={arrowIcon}
-            onClick={actions}
-        >
-        {currentPage &&
-          currentPage.form_data.sections
-            ?.find(
-              (section: PageSection) =>
-                section.name.toLocaleLowerCase() == "actions"
-            )
-            ?.fields.find((field: Field) => field.type == "button")?.label}
-      </Button>
+    <div style={{display: "flex", justifyContent: "flex-end"}} className="mt-4">
+    
+        <div className={`${resourceFinderStore.context.current_page != 0 ? 'w-full md:w-1/2 flex justify-between' : 'w-full flex justify-end' }` }>
+        {  resourceFinderStore.context.current_page != 0 &&
+            <BackButton/>
+        }
+         
+          <button
+              color={resourceFinderStore.context.current_page == 2 ? "green" :"#af2e34"}
+              className="custom-dark-button"
+              onClick={actions}
+          >
+          NEXT <IconArrowRight size={25} />
+        </button>
+        </div>
     </div>
   );
 };

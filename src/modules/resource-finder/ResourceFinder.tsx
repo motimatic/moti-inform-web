@@ -6,6 +6,8 @@ import InfoPanel from "./components/info-panel/infoPanel.tsx";
 import { useSnapshot } from "valtio";
 import { resourceFinderStore } from "../../state/resourceFinderStore.ts";
 import BackButton from "./components/back-button/backButton.tsx";
+import { IconX } from "@tabler/icons-react";
+import { appStore } from "../../appStore.ts";
 
 
 const ResourceFinder = () => {
@@ -14,27 +16,37 @@ const ResourceFinder = () => {
     const totalPages = 3;
     const currentProgress = ((current_page + 1) / totalPages)* 100;
 
+    const reset = async () => {
+        resourceFinderStore.updateCurrentPage(0);
+        resourceFinderStore.updateNextPage(0);
+        appStore.setShowResourceFinder(false);
+    }
+
     return (
-        <Grid columns={12} gutter={0} style={{ margin: 0 }}>
-            <Grid.Col span={{sm:12, md:9}} p={20} m={0}>
-                <Title order={3} >Resource Finder</Title>
-                <Grid align="center position-relative">
-                    <Grid.Col span={{base: 12}} ><ProgressBar currentProgress={currentProgress}/></Grid.Col>
-                    <Box pos={"relative"}>
-                        {  current_page != 0 &&
-                                <Box pos={"absolute"} right={0} top={-26}>
-                                    <Grid.Col span={{base:1}}><BackButton/></Grid.Col>
-                                </Box>
-                        }
-                    </Box>
-                </Grid>
-                <PageRenderer/>
-                <ButtonBar/>
-            </Grid.Col>
-            <Grid.Col span={{sm:12, md:3}} style={{background: '#B6C5C7'}} className="rounded-xs">
+        <div className={`resource-finder  ${appStore.showResourceFinder ? "show-resource-finder" : "hide-resource-finder"}`}>
+          
+               
+                <div className="resource-wrapper">
+                   <div style={{width: "100%", maxWidth: "1200px", margin: "0 auto"}}>
+                    <PageRenderer/>
+                    
+                    { current_page != 2 && <ButtonBar/>}
+                  
+                   </div>
+                    <div>
+                        <ProgressBar currentProgress={currentProgress}/>
+                        <div className="close-button flex items-center md:px-20 pb-4 mt-6 md:mt-9 text-gray-400" onClick={()=>{reset()}}>
+                            <IconX size={20} />
+                            <span className="roobert-regular fs-18">CLOSE</span>
+                        </div>
+                    </div>
+                </div>
+  
+            {/* <Grid.Col span={{sm:12, md:3}} style={{background: '#B6C5C7'}} className="rounded-xs">
                 <InfoPanel />
-            </Grid.Col>
-        </Grid>
+            </Grid.Col> */}
+      
+        </div>
 
     );
 };

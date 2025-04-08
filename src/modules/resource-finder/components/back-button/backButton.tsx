@@ -1,4 +1,4 @@
-import { IconRotateClockwise } from "@tabler/icons-react";
+import { IconArrowLeft } from "@tabler/icons-react";
 import { useSnapshot } from "valtio";
 import { resourceFinderStore } from "../../../../state/resourceFinderStore";
 
@@ -16,7 +16,11 @@ const BackButton = () => {
    		resourceFinderStore.triggerAction();
     }
   return (
-      <IconRotateClockwise size={22} onClick={()=>{goBack()}} className="cursor-pointer" />
+
+	  <button   onClick={()=>{goBack()}}  className="custom-outline-button" >
+	  <IconArrowLeft size={25 }/>
+		BACK
+	  </button>
   );
 };
 

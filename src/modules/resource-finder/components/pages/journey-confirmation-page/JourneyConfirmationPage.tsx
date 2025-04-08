@@ -1,4 +1,4 @@
-import { Box, Button, LoadingOverlay, Text } from '@mantine/core';
+import { Box, Button, LoadingOverlay, Text, Title } from '@mantine/core';
 import {useSnapshot} from "valtio/index";
 import { resourceFinderStore } from '../../../../../state/resourceFinderStore';
 import { Field, PageSection } from '../../../../../shared/models/pageSectionmodel';
@@ -15,27 +15,27 @@ const JourneyConfirmationPage = () => {
         resourceFinderStore.triggerAction();
     }
     return (
-        <Box pos="relative">
-        	<LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
-            <Text size="md" mt={0} pb={20}>{title || "No summary available"}</Text>
-            <h2  className="font-normal text-2xl">{prompt || "No summary available"}</h2>
-            
-            <div className='flex flex-wrap'>
+        <div className="inner">
+               {/* <h1  className="font-normal text-2xl">{prompt || "No summary available"}</h1> */}
+            <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+            <Title className="title roobert-medium" order={1} mt={0} pb={20}>{title || "No summary available"}</Title>
+            <div className='flex flex-wrap flex-col'>
                 { form_data.sections?.filter((section: PageSection) => section.name.toLocaleLowerCase() == "collector").map((section: PageSection)=>{
                     return(
                         section.fields.map((field: Field)=>
-                            <Button key={field.value} 
+                            <button key={field.value} 
                                 onClick={()=>{actions(field)}} 
-                                className='me-2 my-2 bg-amber-300' 
-                                variant={x.length > 0 && x.find((el)=> el.value == field.value ) ? "variant": "outline" }>
+                                className='my-2 custom-button' 
+                                // variant={x.length > 0 && x.find((el)=> el.value == field.value ) ? "variant": "outline" }
+                                >
                                 {field.label} 
-                            </Button> 
+                            </button> 
                             )
                         )
                     })
                 }
             </div>
-        </Box>
+        </div>
     );
 };
 

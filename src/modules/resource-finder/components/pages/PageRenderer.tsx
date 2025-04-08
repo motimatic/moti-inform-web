@@ -85,7 +85,7 @@ const PageRenderer = () => {
             fetchJourneyContext().then;
         }
 
-  }, [snap.buttonClicked]);
+  }, [snap.buttonClicked, appStore.showResourceFinder]);
 
     return (
         <>{CurrentPageComponent ? 

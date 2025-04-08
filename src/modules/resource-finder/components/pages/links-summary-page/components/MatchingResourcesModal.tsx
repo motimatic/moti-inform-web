@@ -7,6 +7,7 @@ import { appStore } from "../../../../../../appStore";
 import { resourceFinderStore } from "../../../../../../state/resourceFinderStore";
 import { JourneyService } from "../../../../../../shared/services/journey/journeyService";
 import { JourneyResource, Resource } from "../../../../../../shared/models/journeyResource.model";
+import { useSnapshot } from "valtio";
 interface MatchingResourcesModalProps {
   opened: boolean;
   close: () => void;
@@ -14,6 +15,7 @@ interface MatchingResourcesModalProps {
 const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, close}) => {
 
     const [showForm, setShowForm] = useState<boolean>(false);
+    const snapshot = useSnapshot(resourceFinderStore);
     const { resources } = resourceFinderStore;
     const redirect = (url: string) => {
         window.open(url, '_blank');
@@ -70,11 +72,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
         }
 
         <Modal.Body className="px-0 py-0">
-            { showForm  ?
-                <div className="px-10 py-8">
-                    <StudentForm setShowForm={setShowForm} />
-                </div>
-            :
+           
             <Container className="mt-5">
                 {resources.length == 0 &&
                     <Container className="flex justify-center items-center h-100">
