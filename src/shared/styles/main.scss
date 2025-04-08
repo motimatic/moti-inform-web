@@ -74,6 +74,11 @@
          }
 
     }
+    .icon{
+        @media screen and (min-width:560px) {
+            display: none
+         }
+    }
     @media screen and (max-width:560px) {
        border-radius: 50%;
        width: 46px;
@@ -260,7 +265,7 @@
         color:#FFF;
           @media screen and (max-width:560px) {
             padding: 2em 1em;
-            }
+        }
        
 
     }
