@@ -16,8 +16,7 @@ const AdBanner = () => {
                         <RenderImage url={appStore.landingPageConfig.ad.media_url} />
                     }
                     <div className="banner-degraded">
-
-                        <h1 className="orbikular-light-italic md:text-lg text-xs "><span className="roobert-medium">Find the right support to </span> <br/>keep your education on track.</h1>
+                        <h1 className="orbikular-light-italic text-xs md:text-lg "><span className="roobert-medium">Find the right support to </span> <br/>keep your education on track.</h1>
                         <span className="roobert-regular fs-20">Whether you need financial aid, academic help, or motivation to <br/> keep going, we’re here to guide you.</span>
                     </div>
                     <div className="banner-mask">

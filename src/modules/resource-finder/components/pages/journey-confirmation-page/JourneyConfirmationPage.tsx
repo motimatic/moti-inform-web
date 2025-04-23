@@ -17,7 +17,6 @@ const JourneyConfirmationPage = () => {
     return (
         <div className="inner">
                {/* <h1  className="font-normal text-2xl">{prompt || "No summary available"}</h1> */}
-            <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
             <Title className="title roobert-medium" order={1} mt={0} pb={20}>{title || "No summary available"}</Title>
             <div className='flex flex-wrap flex-col'>
                 { form_data.sections?.filter((section: PageSection) => section.name.toLocaleLowerCase() == "collector").map((section: PageSection)=>{

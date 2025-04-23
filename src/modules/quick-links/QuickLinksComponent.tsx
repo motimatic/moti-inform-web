@@ -13,7 +13,7 @@ const QuickLinksComponent = () => {
     
     return (
         <Container style={{overflow:"hidden"}}>
-            <Container fluid className={`pt-20 w-full flex flex-col items-start quick-links-menu ${appStore.showQuickLinksMenu ? "show-menu" : "hide-menu"}`}>
+            <Container fluid className={`pt-30 lg:pt-20 w-full flex flex-col items-start quick-links-menu ${appStore.showQuickLinksMenu ? "show-menu" : "hide-menu"}`}>
             <Title className="mt-5 roobert-medium" order={1}>Already know what <br/>you're looking for?</Title>
             <Title order={1} className="orbikular-light-italic">Select a resource below:</Title>
                 <Container fluid className="w-full" px={0}>
@@ -34,7 +34,7 @@ const QuickLinksComponent = () => {
                                             </div>
                                             <div className="mt-5 md:mt-0 pe-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                                                    <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
                                                 </svg>
                                             </div>
                                         </Container>

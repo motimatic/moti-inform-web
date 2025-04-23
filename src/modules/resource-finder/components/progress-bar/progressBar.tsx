@@ -15,7 +15,7 @@ const ProgressBar :  React.FC<ProgressBarProps> = ({ currentProgress }) => {
               style={{
                 position: 'absolute',
                 top: -25,
-                left: currentPage != 2 ? `${currentProgress}%` : "98%",
+                left: currentPage != 2 ? `${currentProgress}%` : "96%",
                 transform: 'translateX(-50%)',
                 color: "#888",
                 fontSize: "15px",
@@ -24,7 +24,7 @@ const ProgressBar :  React.FC<ProgressBarProps> = ({ currentProgress }) => {
             >
               {currentProgress.toFixed(0)}%
             </Text>
-            <Progress radius="xl" size="xl" value={currentProgress} color="#D4FC81"/>
+            <Progress radius="" size="xl" value={currentProgress} color="#D4FC81"/>
             
           </Box>
     );
