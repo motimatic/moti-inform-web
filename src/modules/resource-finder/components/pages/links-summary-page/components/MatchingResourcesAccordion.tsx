@@ -31,7 +31,7 @@ const MatchingResourcesAccordion = () => {
     };
 
     return (
-        <Accordion chevronPosition="left" maw={400} mx="auto" className="accordion-container">
+        <Accordion chevronPosition="left"  mx="auto" className="accordion-container">
             {resources.length > 0 &&
                 resources.map((el: JourneyResource) => {
                     return (
