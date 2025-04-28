@@ -23,7 +23,7 @@ const IdentifyChallengesPage = () => {
             <div className='flex flex-wrap flex-col'>
                 { form_data.sections[0].fields.map(((field: Field)=> {
                     const isSelected = resourceFinderStore.resourceSelected.findIndex(
-                        (resource: ResourceSelected) => resource.value === field.value
+                        (resource: ResourceSelected) => (resource.value === field.value && resource.label === field.label)
                       ) !== -1;
                     return (
                         <button key={field.value} 
