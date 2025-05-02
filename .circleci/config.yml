@@ -1,0 +1,110 @@
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@4.1.2
+jobs:
+  build:
+    working_directory: ~/project
+    docker:
+      - image: cimg/node:21.6.1
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json"}}
+            - v1-dependencies
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - when:
+          condition:
+              equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Build dev
+                command: |
+                    npm run buildDev
+      # - when:
+      #     condition:
+      #       equal: [ main, << pipeline.git.branch >> ]
+      #     steps:
+      #       - run:
+      #           name: Build prod
+      #           command: |
+      #               npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  deploy_dev:
+    working_directory: ~/project
+    docker:
+      - image: cimg/aws:2023.12
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: aws --version
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY_DEV
+          region: ${AWS_DEFAULT_REGION_DEV}
+      - attach_workspace:
+          at: .
+      - when:
+          condition:
+              equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Deploy
+                command: aws s3 sync dist "s3://moti-inform-web" --acl public-read --delete --exact-timestamps
+            # - run:
+            #     name: Cache Invalidate
+            #     command: aws cloudfront create-invalidation --distribution-id "${AWS_DISTRIBUTION_PLATFORM_DEV}" --paths "/*";
+  deploy_prod:
+    working_directory: ~/project
+    docker:
+      - image: cimg/aws:2023.12
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: aws --version
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID_PROD
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY_PROD
+          region: ${AWS_DEFAULT_REGION_DEV}
+      - attach_workspace:
+          at: .
+      - when:
+          condition:
+              equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Deploy
+                command: aws s3 sync dist "s3://${AWS_S3_BUCKET_PLATFORM_PROD}" --acl public-read --delete --exact-timestamps
+            - run:
+                name: Cache Invalidate
+                command: aws cloudfront create-invalidation --distribution-id "${AWS_DISTRIBUTION_PLATFORM_PROD}" --paths "/*";
+workflows:
+  build_and_deploy_dev:
+    when:
+      and:
+        - equal: [ main, << pipeline.git.branch >> ]
+    jobs:
+      - build
+      - deploy_dev:
+          requires:
+            - build
+  # build_and_deploy_prod:
+  #   when:
+  #     and:
+  #       - equal: [ main, << pipeline.git.branch >> ]
+  #   jobs:
+  #     - build
+  #     - deploy_prod:
+  #         requires:
+  #           - build

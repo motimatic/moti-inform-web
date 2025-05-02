@@ -127,7 +127,6 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                 </Tabs>
             }
             </Container>
-        }
         </Modal.Body>
       </Modal>
   );
