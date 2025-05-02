@@ -21,7 +21,7 @@ jobs:
             - node_modules
       - when:
           condition:
-              equal: [ main, << pipeline.git.branch >> ]
+              equal: [ dev, << pipeline.git.branch >> ]
           steps:
             - run:
                 name: Build dev
@@ -56,7 +56,7 @@ jobs:
           at: .
       - when:
           condition:
-              equal: [ main, << pipeline.git.branch >> ]
+              equal: [ dev, << pipeline.git.branch >> ]
           steps:
             - run:
                 name: Deploy
@@ -93,7 +93,7 @@ workflows:
   build_and_deploy_dev:
     when:
       and:
-        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ dev, << pipeline.git.branch >> ]
     jobs:
       - build
       - deploy_dev:
