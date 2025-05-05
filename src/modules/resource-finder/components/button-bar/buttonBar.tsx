@@ -1,15 +1,12 @@
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import { resourceFinderStore } from "../../../../state/resourceFinderStore";
 import { useSnapshot } from "valtio";
 import { useDisclosure } from "@mantine/hooks";
-import MatchingResourcesModal from "../pages/links-summary-page/components/MatchingResourcesModal";
-import StudentForm from "../pages/links-summary-page/components/studentForm";
-import { useState } from "react";
 import BackButton from "../back-button/backButton";
 
 const ButtonBar = () => {
   useSnapshot(resourceFinderStore);
-  const [opened, { open, close }] = useDisclosure(false);
+  const [_opened, { open }] = useDisclosure(false);
   const actions = () => {
    
     if(resourceFinderStore.context.current_page == 2){

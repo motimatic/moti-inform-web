@@ -2,7 +2,6 @@ import { Container, Grid, Tabs, Title, Text, Loader } from "@mantine/core";
 import { Modal, Button } from "@mantine/core";
 import { CloseButton } from "@mantine/core";
 import { useEffect, useState } from "react";
-import StudentForm from "./studentForm";
 import { appStore } from "../../../../../../appStore";
 import { resourceFinderStore } from "../../../../../../state/resourceFinderStore";
 import { JourneyService } from "../../../../../../shared/services/journey/journeyService";
@@ -15,7 +14,7 @@ interface MatchingResourcesModalProps {
 const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, close}) => {
 
     const [showForm, setShowForm] = useState<boolean>(false);
-    const snapshot = useSnapshot(resourceFinderStore);
+    useSnapshot(resourceFinderStore);
     const { resources } = resourceFinderStore;
     const redirect = (url: string) => {
         window.open(url, '_blank');
@@ -127,7 +126,7 @@ const MatchingResourcesModal: React.FC<MatchingResourcesModalProps> = ({opened, 
                 </Tabs>
             }
             </Container>
-        }
+        
         </Modal.Body>
       </Modal>
   );

@@ -1,4 +1,4 @@
-import { Grid, Image } from '@mantine/core';
+import { Image } from '@mantine/core';
 import {useSnapshot} from "valtio/react";
 import {appStore} from "../../../appStore.ts";
 import { IconMenu2, IconX } from '@tabler/icons-react';

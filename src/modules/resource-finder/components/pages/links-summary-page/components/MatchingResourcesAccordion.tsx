@@ -1,5 +1,5 @@
 import {Accordion, AccordionControl} from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { resourceFinderStore } from "../../../../../../state/resourceFinderStore";
 import { JourneyService } from "../../../../../../shared/services/journey/journeyService";
 import { JourneyResource, Resource } from "../../../../../../shared/models/journeyResource.model";

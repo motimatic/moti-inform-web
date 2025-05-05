@@ -1,6 +1,5 @@
 import {useSnapshot} from "valtio/react";
 import {appStore} from "../../../appStore.ts";
-import { Image } from '@mantine/core';
 
 interface RenderImageProps {
     url: string;

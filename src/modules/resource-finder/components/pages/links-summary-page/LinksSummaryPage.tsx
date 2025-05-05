@@ -1,8 +1,7 @@
 
 import { resourceFinderStore } from "../../../../../state/resourceFinderStore.ts";
 import {useSnapshot} from "valtio/index";
-import { Field, PageSection } from "../../../../../shared/models/pageSectionmodel.ts";
-import { Accordion, AccordionControl, LoadingOverlay, Title } from "@mantine/core";
+import {  LoadingOverlay, Title } from "@mantine/core";
 import MatchingResourcesAccordion from "./components/MatchingResourcesAccordion.tsx";
 import { IconArrowRight } from "@tabler/icons-react";
 import StudentForm from "./components/studentForm.tsx";
@@ -11,9 +10,9 @@ import { appStore } from "../../../../../appStore.ts";
 const LinksSummaryPage = () => {
     const snapshot = useSnapshot(resourceFinderStore);
 
-    const { title, prompt, form_data } = snapshot.context.getCurrentPage();
-    const { isLoading, resources } = resourceFinderStore;
-    const fields =  form_data.sections.find((section: PageSection)=> section.name.toLowerCase() == "display");
+    const { prompt } = snapshot.context.getCurrentPage();
+    const { isLoading } = resourceFinderStore;
+    //const fields =  form_data.sections.find((section: PageSection)=> section.name.toLowerCase() == "display");
     return (
         <div className="inner">
                 <StudentForm />

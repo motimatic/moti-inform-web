@@ -1,9 +1,8 @@
-import { Box, Grid } from '@mantine/core';
+import { Grid } from '@mantine/core';
 import ResourceFinder from "../../modules/resource-finder/ResourceFinder.tsx";
 import PageHeader from "./components/pageHeader.tsx";
 import AdBanner from './components/adBanner.tsx';
 import QuickLinksComponent from '../../modules/quick-links/QuickLinksComponent.tsx';
-import Footer from './components/footer.tsx';
 
 const BaseTemplate = () => (
     <>
