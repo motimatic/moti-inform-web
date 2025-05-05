@@ -1,4 +1,4 @@
-import {Button, Container, Grid, Text, Title} from "@mantine/core";
+import { Container, Grid, Text, Title} from "@mantine/core";
 import { useSnapshot } from "valtio";
 import {appStore} from "../../appStore.ts";
 import {QuickLink} from "../../shared/models/quickLink.model.ts";

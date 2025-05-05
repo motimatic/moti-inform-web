@@ -1,12 +1,11 @@
-import { Alert, Box, Container, Grid, Input, LoadingOverlay, Text, TextInput, Title} from "@mantine/core";
-import { Button } from "@mantine/core";
+import { Alert, Box, Container, Grid, Input, LoadingOverlay, TextInput, Title} from "@mantine/core";
 import { useForm } from '@mantine/form';
 import { useState } from "react";
 import { IMaskInput } from 'react-imask';
 import { JourneyService } from "../../../../../../shared/services/journey/journeyService";
 import { Student } from "../../../../../../shared/models/student.model";
 import { resourceFinderStore } from "../../../../../../state/resourceFinderStore";
-import { IconArrowLeft, IconChevronDownLeft, IconChevronLeft } from "@tabler/icons-react";
+import { IconChevronLeft } from "@tabler/icons-react";
 import { appStore } from "../../../../../../appStore";
 import { useSnapshot } from "valtio";
 

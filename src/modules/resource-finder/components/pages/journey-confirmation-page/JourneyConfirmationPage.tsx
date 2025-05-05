@@ -1,13 +1,13 @@
-import { Box, Button, LoadingOverlay, Text, Title } from '@mantine/core';
+import {  Title } from '@mantine/core';
 import {useSnapshot} from "valtio/index";
 import { resourceFinderStore } from '../../../../../state/resourceFinderStore';
 import { Field, PageSection } from '../../../../../shared/models/pageSectionmodel';
 
 const JourneyConfirmationPage = () => {
     const snapshot = useSnapshot(resourceFinderStore);
-    const { title, prompt, form_data, name } = snapshot.context.getCurrentPage();
-    const { isLoading } = resourceFinderStore;
-    const x = snapshot.resourceSelected.filter((resource)=> resource.journeyName == name)
+    const { title, form_data, name } = snapshot.context.getCurrentPage();
+    
+    snapshot.resourceSelected.filter((resource)=> resource.journeyName == name)
     
     const actions =  (field: Field) => {
         resourceFinderStore.selectResource(name , field.value, field.label)

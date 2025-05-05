@@ -1,4 +1,4 @@
-import {Box, Button, LoadingOverlay, Title} from "@mantine/core";
+import {LoadingOverlay, Title} from "@mantine/core";
 import { useSnapshot } from "valtio";
 import { resourceFinderStore } from "../../../../../state/resourceFinderStore";
 import { Field } from "../../../../../shared/models/pageSectionmodel";
@@ -6,7 +6,7 @@ import { ResourceSelected } from "../../../../../shared/models/resourceSelected"
 const IdentifyChallengesPage = () => {
 
     const snapshot = useSnapshot(resourceFinderStore);
-    const { title, prompt, form_data, name } = snapshot.context.getCurrentPage();
+    const { title, form_data, name } = snapshot.context.getCurrentPage();
     const { isLoading } = resourceFinderStore;
     snapshot.resourceSelected.filter((resource)=> resource.journeyName == name)
 

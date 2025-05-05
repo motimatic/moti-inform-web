@@ -7,7 +7,7 @@ import { resourceFinderStore } from "../../../../state/resourceFinderStore.ts";
 import {appStore} from "../../../../appStore.ts";
 import { LoadingOverlay } from "@mantine/core";
 import { Page } from "../../../../shared/models/page.model.ts";
-import { Field, PageSection } from "../../../../shared/models/pageSectionmodel.ts";
+import { Field } from "../../../../shared/models/pageSectionmodel.ts";
 import { ResourceSelected } from "../../../../shared/models/resourceSelected.ts";
 
 
