@@ -39,7 +39,7 @@ jobs:
           root: .
           paths:
             - .
-  deploy_dev:
+  deploy_demo:
     working_directory: ~/project
     docker:
       - image: cimg/aws:2023.12
@@ -96,7 +96,7 @@ workflows:
         - equal: [ dev, << pipeline.git.branch >> ]
     jobs:
       - build
-      - deploy_dev:
+      - deploy_demo:
           requires:
             - build
   # build_and_deploy_prod:
