@@ -77,7 +77,7 @@ jobs:
       - aws-cli/setup:
           aws_access_key_id: AWS_ACCESS_KEY_ID_MOTI_DEV
           aws_secret_access_key: AWS_SECRET_ACCESS_KEY_MOTI_DEV
-          region: AWS_DEFAULT_REGION_MOTI_DEV
+          region: ${AWS_DEFAULT_REGION_MOTI_DEV}
       - attach_workspace:
           at: .
       - when:
