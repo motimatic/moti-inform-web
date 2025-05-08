@@ -65,6 +65,7 @@ jobs:
             # - run:
             #     name: Cache Invalidate
             #     command: aws cloudfront create-invalidation --distribution-id "${AWS_DISTRIBUTION_PLATFORM_DEV}" --paths "/*";
+
   deploy_dev:
     working_directory: ~/project
     docker:
