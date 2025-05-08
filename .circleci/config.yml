@@ -55,13 +55,9 @@ jobs:
           region: ${AWS_DEFAULT_REGION_DEV}
       - attach_workspace:
           at: .
-      - when:
-          condition:
-              equal: [ dev, << pipeline.git.branch >> ]
-          steps:
-            - run:
-                name: Deploy
-                command: aws s3 sync dist "s3://moti-inform-web"
+      - run:
+          name: Deploy
+          command: aws s3 sync dist "s3://moti-inform-web"
 
   deploy_dev:
     working_directory: ~/project
@@ -78,16 +74,12 @@ jobs:
           region: ${AWS_DEFAULT_REGION_MOTI_DEV}
       - attach_workspace:
           at: .
-      - when:
-          condition:
-              equal: [ dev, << pipeline.git.branch >> ]
-          steps:
-            - run:
-                name: Deploy
-                command: aws s3 sync dist "s3://moti-dev-moti-inform-web"
-            - run:
-                name: Cache Invalidate
-                command: aws cloudfront create-invalidation --distribution-id "E302OE8PHKRNZF" --paths "/*";
+      - run:
+          name: Deploy
+          command: aws s3 sync dist "s3://moti-dev-moti-inform-web"
+      - run:
+          name: Cache Invalidate
+          command: aws cloudfront create-invalidation --distribution-id "E302OE8PHKRNZF" --paths "/*";
 
   deploy_prod:
     working_directory: ~/project
@@ -104,16 +96,12 @@ jobs:
           region: ${AWS_DEFAULT_REGION_MOTI_PROD}
       - attach_workspace:
           at: .
-      - when:
-          condition:
-              equal: [ main, << pipeline.git.branch >> ]
-          steps:
-            - run:
-                name: Deploy
-                command: aws s3 sync dist "s3://moti-prod-moti-inform-web"
-            - run:
-                name: Cache Invalidate
-                command: aws cloudfront create-invalidation --distribution-id "E19SX6R1EBBXKP" --paths "/*";
+      - run:
+          name: Deploy
+          command: aws s3 sync dist "s3://moti-prod-moti-inform-web"
+      - run:
+          name: Cache Invalidate
+          command: aws cloudfront create-invalidation --distribution-id "E19SX6R1EBBXKP" --paths "/*";
 
 workflows:
   build_and_deploy_dev:
