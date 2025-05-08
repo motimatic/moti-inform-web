@@ -27,14 +27,14 @@ jobs:
                 name: Build dev
                 command: |
                     npm run buildDev
-      # - when:
-      #     condition:
-      #       equal: [ main, << pipeline.git.branch >> ]
-      #     steps:
-      #       - run:
-      #           name: Build prod
-      #           command: |
-      #               npm run build
+      - when:
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Build prod
+                command: |
+                    npm run build
       - persist_to_workspace:
           root: .
           paths:
@@ -62,9 +62,6 @@ jobs:
             - run:
                 name: Deploy
                 command: aws s3 sync dist "s3://moti-inform-web"
-            # - run:
-            #     name: Cache Invalidate
-            #     command: aws cloudfront create-invalidation --distribution-id "${AWS_DISTRIBUTION_PLATFORM_DEV}" --paths "/*";
 
   deploy_dev:
     working_directory: ~/project
@@ -102,9 +99,9 @@ jobs:
           docker_layer_caching: true
       - run: aws --version
       - aws-cli/setup:
-          aws_access_key_id: AWS_ACCESS_KEY_ID_PROD
-          aws_secret_access_key: AWS_SECRET_ACCESS_KEY_PROD
-          region: ${AWS_DEFAULT_REGION_DEV}
+          aws_access_key_id: AWS_ACCESS_KEY_ID_MOTI_PROD
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY_MOTI_PROD
+          region: ${AWS_DEFAULT_REGION_MOTI_PROD}
       - attach_workspace:
           at: .
       - when:
@@ -113,10 +110,11 @@ jobs:
           steps:
             - run:
                 name: Deploy
-                command: aws s3 sync dist "s3://${AWS_S3_BUCKET_PLATFORM_PROD}" --acl public-read --delete --exact-timestamps
+                command: aws s3 sync dist "s3://moti-prod-moti-inform-web"
             - run:
                 name: Cache Invalidate
-                command: aws cloudfront create-invalidation --distribution-id "${AWS_DISTRIBUTION_PLATFORM_PROD}" --paths "/*";
+                command: aws cloudfront create-invalidation --distribution-id "E19SX6R1EBBXKP" --paths "/*";
+
 workflows:
   build_and_deploy_dev:
     when:
@@ -130,12 +128,12 @@ workflows:
       - deploy_dev:
           requires:
             - build
-  # build_and_deploy_prod:
-  #   when:
-  #     and:
-  #       - equal: [ main, << pipeline.git.branch >> ]
-  #   jobs:
-  #     - build
-  #     - deploy_prod:
-  #         requires:
-  #           - build
+  build_and_deploy_prod:
+    when:
+      and:
+        - equal: [ main, << pipeline.git.branch >> ]
+    jobs:
+      - build
+      - deploy_prod:
+          requires:
+            - build
