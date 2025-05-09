@@ -21,6 +21,14 @@ jobs:
             - node_modules
       - when:
           condition:
+              equal: [ demo, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Build demo
+                command: |
+                    npm run buildDemo
+      - when:
+          condition:
               equal: [ dev, << pipeline.git.branch >> ]
           steps:
             - run:
@@ -104,18 +112,26 @@ jobs:
           command: aws cloudfront create-invalidation --distribution-id "E19SX6R1EBBXKP" --paths "/*";
 
 workflows:
+  build_and_deploy_demo:
+    when:
+      and:
+        - equal: [ demo, << pipeline.git.branch >> ]
+    jobs:
+      - build
+      - deploy_demo:
+          requires:
+            - build
+
   build_and_deploy_dev:
     when:
       and:
         - equal: [ dev, << pipeline.git.branch >> ]
     jobs:
       - build
-      - deploy_demo:
-          requires:
-            - build
       - deploy_dev:
           requires:
             - build
+
   build_and_deploy_prod:
     when:
       and:

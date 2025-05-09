@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "node --inspect ./node_modules/vite/bin/vite.js",
-    "build": "tsc -b && vite build",
-    "buildDev": "tsc -b && vite build",
+    "build": "tsc -b && vite build --mode=production",
+    "buildDev": "tsc && vite build --mode=development",
+    "buildDemo": "tsc && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
