@@ -26,7 +26,7 @@ jobs:
             - run:
                 name: Build demo
                 command: |
-                    npm run buildDemo
+                  npm run build:demo
       - when:
           condition:
               equal: [ dev, << pipeline.git.branch >> ]
@@ -34,7 +34,7 @@ jobs:
             - run:
                 name: Build dev
                 command: |
-                    npm run buildDev
+                  npm run build:dev
       - when:
           condition:
             equal: [ main, << pipeline.git.branch >> ]
